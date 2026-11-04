@@ -69,14 +69,19 @@ export async function mutateDecision(input: {
 }
 
 export async function reserveAiTurn(owner: string) {
+  // guard:allow-env-credential — Non-secret deployment toggle for the bounded sponsored agent.
   if (process.env.SHORTLIST_SPONSORED_AI !== "true") fail("The sponsored agent is not enabled for this deployment. You can still compare and correct quotes.", { errorCode: "ai_not_configured", statusCode: 503 });
   const day = new Date().toISOString().slice(0, 10);
-  const limits = [{ id: "global:" + day, max: Number(process.env.SHORTLIST_DAILY_AI_LIMIT ?? 20) }, { id: owner + ":" + day, max: Number(process.env.SHORTLIST_USER_DAILY_AI_LIMIT ?? 5) }];
+  // guard:allow-env-credential — Non-secret deployment-wide call limit, validated below.
+  const globalMax = Number(process.env.SHORTLIST_DAILY_AI_LIMIT ?? 20);
+  // guard:allow-env-credential — Non-secret per-account sponsored call limit, validated below.
+  const userMax = Number(process.env.SHORTLIST_USER_DAILY_AI_LIMIT ?? 5);
+  const limits = [{ id: "global:" + day, ownerEmail: "__shortlist_sponsored_system__", max: globalMax }, { id: owner + ":" + day, ownerEmail: owner, max: userMax }];
   if (limits.some(limit => !Number.isSafeInteger(limit.max) || limit.max < 1 || limit.max > 100)) fail("The agent budget is not configured.", { errorCode: "ai_not_configured", statusCode: 503 });
   await getDb().transaction(async tx => {
     for (const limit of limits) {
-      await tx.insert(aiBudgets).values({ id: limit.id, used: 0 }).onConflictDoNothing();
-      const [counter] = await tx.update(aiBudgets).set({ used: sql`${aiBudgets.used} + 1` }).where(and(eq(aiBudgets.id, limit.id), sql`${aiBudgets.used} < ${limit.max}`)).returning();
+      await tx.insert(aiBudgets).values({ id: limit.id, ownerEmail: limit.ownerEmail, used: 0 }).onConflictDoNothing();
+      const [counter] = await tx.update(aiBudgets).set({ used: sql`${aiBudgets.used} + 1` }).where(and(eq(aiBudgets.id, limit.id), eq(aiBudgets.ownerEmail, limit.ownerEmail), sql`${aiBudgets.used} < ${limit.max}`)).returning();
       if (!counter) fail("The daily sponsored agent allowance has been used. Manual workspace tools remain available.", { errorCode: "ai_budget_exhausted", statusCode: 429 });
     }
   });

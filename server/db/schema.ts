@@ -25,5 +25,6 @@ export const decisionEvents = pgTable("shortlist_events", {
 
 export const aiBudgets = pgTable("shortlist_ai_budgets", {
   id: text("id").primaryKey(),
+  ownerEmail: text("owner_email").notNull(),
   used: integer("used").notNull().default(0),
 });
