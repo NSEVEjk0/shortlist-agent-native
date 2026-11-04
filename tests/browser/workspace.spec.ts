@@ -1,9 +1,10 @@
 import { test, expect } from "@playwright/test";
 import { randomUUID } from "node:crypto";
 
-test("authenticated buying flow preserves corrections, recalculates, highlights sources and undoes", async ({ page }) => {
+test("authenticated buying flow preserves corrections, recalculates, highlights sources and undoes", async ({ page }, testInfo) => {
   const password = "Fixture-" + randomUUID() + "-aA1";
-  const response = await page.request.post("/_agent-native/auth/sign-up/email", { data: { email: "browser-" + randomUUID() + "@example.invalid", name: "Browser fixture", password } });
+  const origin = new URL(testInfo.project.use.baseURL ?? "http://127.0.0.1:4173").origin;
+  const response = await page.request.post("/_agent-native/auth/ba/sign-up/email", { headers: { Origin: origin }, data: { email: "browser-" + randomUUID() + "@example.invalid", name: "Browser fixture", password } });
   expect(response.ok(), await response.text()).toBeTruthy();
   await page.goto("/home");
   await page.getByRole("button", { name: "Try the example" }).click();
