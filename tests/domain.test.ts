@@ -2,14 +2,16 @@ import test from "node:test";
 import assert from "node:assert/strict";
 import { applyExtraction, changeQuote, correctField, DecisionError, excerpt, newQuote, recommend, replaceSource, sampleDecision, validDate, withRequirements } from "../server/domain.ts";
 import { moneyInput } from "../shared/format.ts";
-import type { Extraction } from "../shared/types.ts";
+import type { DecisionState, Extraction } from "../shared/types.ts";
+
+function quoteAt(state: DecisionState, index: number) { const quote = state.quotes[index]; assert.ok(quote); return quote; }
 
 test("a complete decision changes supplier as constraints change while a human correction survives", () => {
   let state = sampleDecision();
   assert.equal(recommend(state).winner?.id, "cedar");
   state = changeQuote(state, "cedar", q => correctField(q, "deliveryDate", "2026-11-18", "Supplier confirmed the delay"));
   assert.equal(recommend(state).winner?.id, "harbor");
-  const cedar = state.quotes[0];
+  const cedar = quoteAt(state, 0);
   const reapplied = applyExtraction(cedar, cedar.sourceHash, { fields: { deliveryDate: { value: "2026-11-13", evidence: excerpt(cedar.source, "Delivery: November 13, 2026") } }, exclusions: cedar.exclusions, termsReviewed: true });
   assert.deepEqual(reapplied.preserved, ["deliveryDate"]);
   assert.equal(reapplied.quote.fields.deliveryDate.value, "2026-11-18");
@@ -17,7 +19,7 @@ test("a complete decision changes supplier as constraints change while a human c
   assert.equal(recommend(state).winner, null);
   state = withRequirements(state, { budgetMinor: 65000, deliveryBy: "2026-11-10" });
   assert.equal(recommend(state).winner?.id, "rushline");
-  assert.equal(state.quotes[0].fields.deliveryDate.locked, true);
+  assert.equal(quoteAt(state, 0).fields.deliveryDate.locked, true);
 });
 
 test("exact minor-unit arithmetic includes shipping and tax", () => {
@@ -29,7 +31,7 @@ test("exact minor-unit arithmetic includes shipping and tax", () => {
 });
 
 test("a mismatched source or made-up citation cannot enter a recommendation", () => {
-  const q = sampleDecision().quotes[0];
+  const q = quoteAt(sampleDecision(), 0);
   const extraction: Extraction = { fields: { unitMinor: { value: 540, evidence: excerpt(q.source, "Unit price: $5.40 USD") } }, exclusions: [], termsReviewed: true };
   assert.throws(() => applyExtraction(q, "old-revision", extraction), (e: unknown) => e instanceof DecisionError && e.code === "stale_source");
   extraction.fields.unitMinor!.evidence.text = "Unit price: $0.01 USD";
@@ -43,19 +45,19 @@ test("unknown, different-currency, unreviewed and incorrectly sized quotes are i
   const state = sampleDecision();
   state.quotes = [newQuote("Unclear supplier", "Price is negotiable")];
   assert.equal(recommend(state).winner, null);
-  state.quotes = [sampleDecision().quotes[0]];
-  state.quotes[0].fields.currency.value = "EUR";
+  state.quotes = [quoteAt(sampleDecision(), 0)];
+  quoteAt(state, 0).fields.currency.value = "EUR";
   assert.equal(recommend(state).winner, null);
-  state.quotes[0].fields.currency.value = "USD";
-  state.quotes[0].fields.quantity.value = 10;
+  quoteAt(state, 0).fields.currency.value = "USD";
+  quoteAt(state, 0).fields.quantity.value = 10;
   assert.equal(recommend(state).winner, null);
-  state.quotes[0].fields.quantity.value = 100;
-  state.quotes[0].termsReviewed = false;
+  quoteAt(state, 0).fields.quantity.value = 100;
+  quoteAt(state, 0).termsReviewed = false;
   assert.equal(recommend(state).winner, null);
 });
 
 test("a revised source invalidates extracted values and preserves explicitly locked corrections", () => {
-  const q = correctField(sampleDecision().quotes[0], "deliveryDate", "2026-11-18", "Confirmed by supplier");
+  const q = correctField(quoteAt(sampleDecision(), 0), "deliveryDate", "2026-11-18", "Confirmed by supplier");
   const next = replaceSource(q, "Revised quote: $10 per unit");
   assert.notEqual(next.sourceHash, q.sourceHash);
   assert.equal(next.fields.unitMinor.value, null);
@@ -68,11 +70,11 @@ test("calendar validation rejects rollover dates and money rejects unsafe amount
   assert.equal(validDate("2026-02-30"), false);
   assert.equal(validDate("2028-02-29"), true);
   assert.throws(() => withRequirements(sampleDecision(), { budgetMinor: -1 }));
-  assert.throws(() => correctField(sampleDecision().quotes[0], "unitMinor", 1.1, "Corrected"));
+  assert.throws(() => correctField(quoteAt(sampleDecision(), 0), "unitMinor", 1.1, "Corrected"));
 });
 
 test("sorting is deterministic when equally priced quotes arrive on different dates", () => {
   const state = sampleDecision();
-  state.quotes[1] = correctField(state.quotes[1], "shippingMinor", 6000, "Supplier reduced shipping");
+  state.quotes[1] = correctField(quoteAt(state, 1), "shippingMinor", 6000, "Supplier reduced shipping");
   assert.equal(recommend(state).winner?.id, "harbor");
 });

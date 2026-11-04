@@ -36,7 +36,7 @@ export async function readDecision(id: string, owner: string): Promise<DecisionV
 export async function mutateDecision(input: {
   id: string;
   expectedVersion: number;
-  ctx?: ActionRunContext;
+  ctx?: ActionRunContext | undefined;
   kind: string;
   summary: string;
   change: (state: DecisionState) => DecisionState;

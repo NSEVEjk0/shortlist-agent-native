@@ -5,7 +5,7 @@ export class DecisionError extends Error {
   code: string;
   constructor(code: string, message: string) { super(message); this.code = code; }
 }
-const reject = (code: string, message: string): never => { throw new DecisionError(code, message); };
+function reject(code: string, message: string): never { throw new DecisionError(code, message); }
 export const sourceHash = (source: string) => createHash("sha256").update(source).digest("hex");
 export const stateHash = (state: DecisionState) => sourceHash(JSON.stringify(state));
 const unknown = (): QuoteField => ({ value: null, locked: false, origin: "unknown", evidence: null, note: null });
@@ -34,7 +34,7 @@ function validateField(key: FieldKey, value: FieldValue) {
   }
 }
 
-export function newQuote(supplier: string, source: string, id = randomUUID()): Quote {
+export function newQuote(supplier: string, source: string, id: string = randomUUID()): Quote {
   if (!supplier.trim() || supplier.length > 120) reject("invalid_source", "A supplier name is required, up to 120 characters.");
   if (!source.trim() || source.length > 12_000) reject("invalid_source", "Quote text must contain between 1 and 12,000 characters.");
   return { id, supplier: supplier.trim(), source, sourceHash: sourceHash(source), fields: Object.fromEntries(FIELD_KEYS.map(key => [key, unknown()])) as Quote["fields"], exclusions: [], termsReviewed: false };
@@ -51,17 +51,23 @@ function semanticEvidence(key: FieldKey, value: FieldValue, text: string) {
   if (key === "deliveryDate") {
     const months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
     const [year, month, day] = String(value).split("-");
-    const alternative = months[Number(month) - 1] + " " + Number(day) + ", " + year;
+    const monthName = months[Number(month) - 1];
+    if (!monthName) reject("invalid_field", "The delivery month is not valid.");
+    const alternative = monthName + " " + Number(day) + ", " + year;
     if (!text.includes(String(value)) && !text.includes(alternative)) reject("unsupported_value", "The cited text must explicitly contain the delivery date.");
   } else if (key === "currency") {
     const symbols: Record<string, string> = { USD: "$", EUR: "€", GBP: "£" };
-    if (!text.includes(String(value)) && !text.includes(symbols[String(value)])) reject("unsupported_value", "The cited text must identify the currency.");
+    const symbol = symbols[String(value)];
+    if (!symbol) reject("invalid_field", "Unsupported currency.");
+    if (!text.includes(String(value)) && !text.includes(symbol)) reject("unsupported_value", "The cited text must identify the currency.");
   } else if (key === "quantity") {
-    const numbers = text.match(/\b\d+\b/g) ?? [];
+    const numbers: string[] = text.match(/\b\d+\b/g) ?? [];
     if (!numbers.includes(String(value))) reject("unsupported_value", "The cited text must explicitly contain the quantity.");
   } else {
     const amounts = [...text.matchAll(/(?:^|[^\d.])(\d{1,7}(?:\.\d{1,2})?)(?![\d.])/g)].map(match => {
-      const [whole, fraction = ""] = match[1].split(".");
+      const digits = match[1];
+      if (!digits) reject("invalid_evidence", "The cited amount could not be read.");
+      const [whole, fraction = ""] = digits.split(".");
       return Number(whole) * 100 + Number(fraction.padEnd(2, "0"));
     });
     const explicitZero = value === 0 && /\b(free|included|no tax|tax included)\b/i.test(text);
@@ -141,8 +147,9 @@ export function recommend(state: DecisionState): Recommendation {
   return { winner: feasible[0] ?? null, assessments };
 }
 
-export function withRequirements(state: DecisionState, patch: Partial<Requirements>): DecisionState {
-  const requirements = { ...state.requirements, ...patch };
+export function withRequirements(state: DecisionState, patch: { [K in keyof Requirements]?: Requirements[K] | undefined }): DecisionState {
+  const defined = Object.fromEntries(Object.entries(patch).filter(([, value]) => value !== undefined)) as Partial<Requirements>;
+  const requirements = { ...state.requirements, ...defined };
   validateRequirements(requirements);
   return { ...structuredClone(state), requirements };
 }
@@ -151,7 +158,9 @@ export function changeQuote(state: DecisionState, id: string, change: (quote: Qu
   const index = state.quotes.findIndex(quote => quote.id === id);
   if (index === -1) reject("not_found", "That supplier quote no longer exists.");
   const next = structuredClone(state);
-  next.quotes[index] = change(next.quotes[index]);
+  const quote = next.quotes[index];
+  if (!quote) reject("not_found", "That supplier quote no longer exists.");
+  next.quotes[index] = change(quote);
   return next;
 }
 
@@ -171,10 +180,15 @@ export function sampleDecision(): DecisionState {
     const quote = newQuote(sample.supplier, sample.source, sample.id);
     const values: Record<FieldKey, FieldValue> = { quantity: 100, unitMinor: sample.unit, shippingMinor: sample.shipping, taxMinor: 0, currency: "USD", deliveryDate: sample.date };
     const lines = sample.source.split("\n");
-    const evidenceLines: Record<FieldKey, string> = { quantity: lines[1], unitMinor: lines[2], shippingMinor: lines[3], taxMinor: lines[4], currency: lines[2], deliveryDate: lines[5] };
+    const line = (index: number): string => {
+      const value = lines[index];
+      if (!value) reject("invalid_evidence", "The example quote is incomplete.");
+      return value;
+    };
+    const evidenceLines: Record<FieldKey, string> = { quantity: line(1), unitMinor: line(2), shippingMinor: line(3), taxMinor: line(4), currency: line(2), deliveryDate: line(5) };
     return applyExtraction(quote, quote.sourceHash, {
       fields: Object.fromEntries(FIELD_KEYS.map(key => [key, { value: values[key], evidence: excerpt(sample.source, evidenceLines[key]) }])) as Extraction["fields"],
-      exclusions: [{ text: "Design services are not included", evidence: excerpt(sample.source, lines[6]) }],
+      exclusions: [{ text: "Design services are not included", evidence: excerpt(sample.source, line(6)) }],
       termsReviewed: true,
     }).quote;
   });

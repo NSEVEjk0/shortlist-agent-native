@@ -13,7 +13,7 @@ export default defineAction({
   run: async ({ id, expectedVersion }, ctx) => {
     const owner = humanOnly(ctx);
     const [last] = await getDb().select().from(decisionEvents).where(and(eq(decisionEvents.decisionId, id), eq(decisionEvents.ownerEmail, owner), eq(decisionEvents.version, expectedVersion))).limit(1);
-    if (!last || last.kind === "undo") decisionErrors.fail("There is no recent change to undo.", "undo_unavailable", { statusCode: 409 });
+    if (!last || last.kind === "undo") return decisionErrors.fail("There is no recent change to undo.", "undo_unavailable", { statusCode: 409 });
     return mutateDecision({ id, expectedVersion, ctx, kind: "undo", summary: "Undid: " + last.summary, change: () => structuredClone(last.beforeState) });
   },
 });

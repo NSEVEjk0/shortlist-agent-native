@@ -43,7 +43,7 @@ export type Recommendation = {
   assessments: QuoteAssessment[];
 };
 export type Extraction = {
-  fields: Partial<Record<FieldKey, { value: FieldValue; evidence: Evidence }>>;
+  fields: { [K in FieldKey]?: { value: FieldValue; evidence: Evidence } | undefined };
   exclusions: { text: string; evidence: Evidence }[];
   termsReviewed: boolean;
 };

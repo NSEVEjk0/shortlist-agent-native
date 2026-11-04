@@ -11,7 +11,7 @@ export default defineAction({
   run: async ({ id, quoteId }, ctx) => {
     const view = await readDecision(id, requireOwner(ctx));
     const quote = view.state.quotes.find(item => item.id === quoteId);
-    if (!quote) decisionErrors.fail("That quote was not found.", "not_found", { statusCode: 404 });
+    if (!quote) return decisionErrors.fail("That quote was not found.", "not_found", { statusCode: 404 });
     return { id, version: view.version, quote };
   },
 });
