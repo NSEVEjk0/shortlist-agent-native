@@ -1,0 +1,25 @@
+# Shortlist
+
+This is an Agent-Native supplier decision workspace, created from the official default scaffold at core/toolkit 0.223.0. Keep normal reads and writes in registered actions. UI and agent share PostgreSQL through Drizzle. AI work uses the framework agent chat.
+
+All decisions and events are private to an authenticated owner. Reject requests without a session. Every write locks the aggregate row, compares the expected version, inserts its event and changes the state in the same transaction. Return a receipt observed from the committed row.
+
+The agent cannot change manual locks or make human corrections. Extraction needs the current source hash and exact citations. Replacing a source invalidates extracted values. Unknown cost, currency, quantity, delivery or exclusion-review status prevents selection. Money uses integer minor units. Undo restores content while increasing the version.
+
+Primary route: /home, with decision and selected quote IDs in URL navigation state. Preserve the framework chat, sign-in and settings routes.
+
+| Action | Purpose |
+| --- | --- |
+| list-decisions | List the owner's bounded workspace list |
+| create-decision | Create an empty workspace or disclosed fictional example |
+| get-decision | Read state, ranking and recent changes |
+| update-requirements | Change budget, currency, quantity or deadline |
+| add-quote | Store a supplier's original text |
+| apply-extraction | Apply source-backed fields without replacing locks |
+| correct-quote | Human correction with reason and optional lock |
+| replace-quote-source | Replace text and invalidate old extraction |
+| undo-decision | Undo the most recent non-undo write |
+| export-decision | Export a decision brief and source evidence |
+| view-screen | Read the current decision and quote context |
+
+Use focused framework imports and real action hooks. Do not deep-import internals or call action handlers directly. Keep deployment credentials out of source. Required checks: domain tests, action/storage integration tests, typecheck, doctor, production build and browser verification of the primary workflow.

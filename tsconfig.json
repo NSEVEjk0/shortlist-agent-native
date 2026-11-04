@@ -1,0 +1,19 @@
+{
+  "extends": "@agent-native/core/tsconfig.base.json",
+  "include": [
+    "app/**/*",
+    "server/**/*",
+    "shared/**/*",
+    "scripts/**/*",
+    "vite.config.ts",
+    "react-router.config.ts",
+    ".react-router/types/**/*",
+    ".generated/**/*",
+    "actions/**/*",
+    "tests/**/*",
+    "playwright.config.ts"
+  ],
+  "compilerOptions": {
+    "allowImportingTsExtensions": true
+  }
+}
