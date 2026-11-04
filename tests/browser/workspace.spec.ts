@@ -14,13 +14,13 @@ test("authenticated buying flow preserves corrections, recalculates, highlights 
   await page.getByRole("dialog").locator('input[name="note"]').fill("Supplier confirmed the delay");
   await page.getByRole("button", { name: "Save correction" }).click();
   await expect(page.getByTestId("recommendation")).toHaveText("Harbor Studio");
-  await expect(page.getByText("Locked", { exact: true })).toBeVisible();
+  await expect(page.getByLabel("Delivery date locked", { exact: true })).toBeVisible();
   await page.getByRole("textbox", { name: "Total budget", exact: true }).fill("590.00");
   await page.getByRole("button", { name: "Update decision" }).click();
   await expect(page.getByTestId("recommendation")).toHaveText("No suitable offer");
   await page.getByRole("button", { name: "Undo", exact: true }).click();
   await expect(page.getByTestId("recommendation")).toHaveText("Harbor Studio");
-  await expect(page.getByText("Locked", { exact: true })).toBeVisible();
+  await expect(page.getByLabel("Delivery date locked", { exact: true })).toBeVisible();
   await page.getByRole("textbox", { name: "Total budget", exact: true }).fill("650.00");
   await page.getByLabel("Delivery deadline", { exact: true }).fill("2026-11-10");
   await page.getByRole("button", { name: "Update decision" }).click();
