@@ -1,0 +1,1630 @@
+{
+  "schema": "shortlist-tour-v1",
+  "mode": "guided-fictional-domain-snapshots-no-agent",
+  "engine": {
+    "domainSHA256": "6687098444cb9244e1a8988f2c9947cdab56d0d28d05f2f6f6251a0fb7b04e6d",
+    "typesSHA256": "f962f2acdb7dad54ea74b163a7eec0d94dcf0b64e3424ae985f0272ada82368f"
+  },
+  "steps": [
+    {
+      "id": "compare",
+      "title": "Read the complete cost",
+      "short": "Compare",
+      "detail": "Harbor has the lowest unit price. Cedar has the lowest complete cost once shipping is included.",
+      "change": "Three fictional quotes, with exact excerpts for each extracted fact.",
+      "operation": "sampleDecision",
+      "quote": "harbor",
+      "field": "shippingMinor",
+      "state": {
+        "title": "Workshop welcome kits",
+        "requirements": {
+          "budgetMinor": 65000,
+          "quantity": 100,
+          "currency": "USD",
+          "deliveryBy": "2026-11-14"
+        },
+        "quotes": [
+          {
+            "id": "cedar",
+            "supplier": "Cedar Print",
+            "source": "Cedar Print — supplier quote\nQuantity: 100 units\nUnit price: $5.40 USD\nShipping: $35.00 USD\nTax: $0.00 USD\nDelivery: November 13, 2026\nExclusions: design services are not included.",
+            "sourceHash": "4822fb831a73f05dad893358b968cdc97876afcb980248559228e641919a4dc5",
+            "fields": {
+              "quantity": {
+                "value": 100,
+                "locked": false,
+                "origin": "source",
+                "evidence": {
+                  "start": 29,
+                  "end": 48,
+                  "text": "Quantity: 100 units"
+                },
+                "note": null
+              },
+              "unitMinor": {
+                "value": 540,
+                "locked": false,
+                "origin": "source",
+                "evidence": {
+                  "start": 49,
+                  "end": 70,
+                  "text": "Unit price: $5.40 USD"
+                },
+                "note": null
+              },
+              "shippingMinor": {
+                "value": 3500,
+                "locked": false,
+                "origin": "source",
+                "evidence": {
+                  "start": 71,
+                  "end": 91,
+                  "text": "Shipping: $35.00 USD"
+                },
+                "note": null
+              },
+              "taxMinor": {
+                "value": 0,
+                "locked": false,
+                "origin": "source",
+                "evidence": {
+                  "start": 92,
+                  "end": 106,
+                  "text": "Tax: $0.00 USD"
+                },
+                "note": null
+              },
+              "currency": {
+                "value": "USD",
+                "locked": false,
+                "origin": "source",
+                "evidence": {
+                  "start": 49,
+                  "end": 70,
+                  "text": "Unit price: $5.40 USD"
+                },
+                "note": null
+              },
+              "deliveryDate": {
+                "value": "2026-11-13",
+                "locked": false,
+                "origin": "source",
+                "evidence": {
+                  "start": 107,
+                  "end": 134,
+                  "text": "Delivery: November 13, 2026"
+                },
+                "note": null
+              }
+            },
+            "exclusions": [
+              {
+                "text": "Design services are not included",
+                "evidence": {
+                  "start": 135,
+                  "end": 180,
+                  "text": "Exclusions: design services are not included."
+                }
+              }
+            ],
+            "termsReviewed": true
+          },
+          {
+            "id": "harbor",
+            "supplier": "Harbor Studio",
+            "source": "Harbor Studio — supplier quote\nQuantity: 100 units\nUnit price: $5.15 USD\nShipping: $80.00 USD\nTax: $0.00 USD\nDelivery: November 12, 2026\nExclusions: design services are not included.",
+            "sourceHash": "5797089d4acfd4095342e6bc5dd1edf84ee8253c94d77340fd2950c16e72fbef",
+            "fields": {
+              "quantity": {
+                "value": 100,
+                "locked": false,
+                "origin": "source",
+                "evidence": {
+                  "start": 31,
+                  "end": 50,
+                  "text": "Quantity: 100 units"
+                },
+                "note": null
+              },
+              "unitMinor": {
+                "value": 515,
+                "locked": false,
+                "origin": "source",
+                "evidence": {
+                  "start": 51,
+                  "end": 72,
+                  "text": "Unit price: $5.15 USD"
+                },
+                "note": null
+              },
+              "shippingMinor": {
+                "value": 8000,
+                "locked": false,
+                "origin": "source",
+                "evidence": {
+                  "start": 73,
+                  "end": 93,
+                  "text": "Shipping: $80.00 USD"
+                },
+                "note": null
+              },
+              "taxMinor": {
+                "value": 0,
+                "locked": false,
+                "origin": "source",
+                "evidence": {
+                  "start": 94,
+                  "end": 108,
+                  "text": "Tax: $0.00 USD"
+                },
+                "note": null
+              },
+              "currency": {
+                "value": "USD",
+                "locked": false,
+                "origin": "source",
+                "evidence": {
+                  "start": 51,
+                  "end": 72,
+                  "text": "Unit price: $5.15 USD"
+                },
+                "note": null
+              },
+              "deliveryDate": {
+                "value": "2026-11-12",
+                "locked": false,
+                "origin": "source",
+                "evidence": {
+                  "start": 109,
+                  "end": 136,
+                  "text": "Delivery: November 12, 2026"
+                },
+                "note": null
+              }
+            },
+            "exclusions": [
+              {
+                "text": "Design services are not included",
+                "evidence": {
+                  "start": 137,
+                  "end": 182,
+                  "text": "Exclusions: design services are not included."
+                }
+              }
+            ],
+            "termsReviewed": true
+          },
+          {
+            "id": "rushline",
+            "supplier": "Rushline",
+            "source": "Rushline — supplier quote\nQuantity: 100 units\nUnit price: $6.25 USD\nShipping: free\nTax: $0.00 USD\nDelivery: November 9, 2026\nExclusions: design services are not included.",
+            "sourceHash": "7d3ab5e74e9bac49e694a4caaf932a5f013684e34ce130bb0c87bb7521918350",
+            "fields": {
+              "quantity": {
+                "value": 100,
+                "locked": false,
+                "origin": "source",
+                "evidence": {
+                  "start": 26,
+                  "end": 45,
+                  "text": "Quantity: 100 units"
+                },
+                "note": null
+              },
+              "unitMinor": {
+                "value": 625,
+                "locked": false,
+                "origin": "source",
+                "evidence": {
+                  "start": 46,
+                  "end": 67,
+                  "text": "Unit price: $6.25 USD"
+                },
+                "note": null
+              },
+              "shippingMinor": {
+                "value": 0,
+                "locked": false,
+                "origin": "source",
+                "evidence": {
+                  "start": 68,
+                  "end": 82,
+                  "text": "Shipping: free"
+                },
+                "note": null
+              },
+              "taxMinor": {
+                "value": 0,
+                "locked": false,
+                "origin": "source",
+                "evidence": {
+                  "start": 83,
+                  "end": 97,
+                  "text": "Tax: $0.00 USD"
+                },
+                "note": null
+              },
+              "currency": {
+                "value": "USD",
+                "locked": false,
+                "origin": "source",
+                "evidence": {
+                  "start": 46,
+                  "end": 67,
+                  "text": "Unit price: $6.25 USD"
+                },
+                "note": null
+              },
+              "deliveryDate": {
+                "value": "2026-11-09",
+                "locked": false,
+                "origin": "source",
+                "evidence": {
+                  "start": 98,
+                  "end": 124,
+                  "text": "Delivery: November 9, 2026"
+                },
+                "note": null
+              }
+            },
+            "exclusions": [
+              {
+                "text": "Design services are not included",
+                "evidence": {
+                  "start": 125,
+                  "end": 170,
+                  "text": "Exclusions: design services are not included."
+                }
+              }
+            ],
+            "termsReviewed": true
+          }
+        ]
+      },
+      "stateSHA256": "b60ee6d06a59b3ac24b5fae50f5907732f6f13e529cb17ee3891cfe826c5f2dd",
+      "recommendation": {
+        "winner": {
+          "id": "cedar",
+          "supplier": "Cedar Print",
+          "totalMinor": 57500,
+          "deliveryDate": "2026-11-13",
+          "eligible": true,
+          "reasons": [],
+          "warnings": [
+            "Design services are not included"
+          ]
+        },
+        "assessments": [
+          {
+            "id": "cedar",
+            "supplier": "Cedar Print",
+            "totalMinor": 57500,
+            "deliveryDate": "2026-11-13",
+            "eligible": true,
+            "reasons": [],
+            "warnings": [
+              "Design services are not included"
+            ]
+          },
+          {
+            "id": "harbor",
+            "supplier": "Harbor Studio",
+            "totalMinor": 59500,
+            "deliveryDate": "2026-11-12",
+            "eligible": true,
+            "reasons": [],
+            "warnings": [
+              "Design services are not included"
+            ]
+          },
+          {
+            "id": "rushline",
+            "supplier": "Rushline",
+            "totalMinor": 62500,
+            "deliveryDate": "2026-11-09",
+            "eligible": true,
+            "reasons": [],
+            "warnings": [
+              "Design services are not included"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": "correct",
+      "title": "Keep the supplier's correction",
+      "short": "Correct & lock",
+      "detail": "The supplier says Cedar will arrive on November 18. Record the reason and lock that date; Harbor now meets the requirements at the lowest total.",
+      "change": "Cedar delivery: Nov 13 → Nov 18. Recommendation: Cedar → Harbor.",
+      "operation": "correctField",
+      "quote": "cedar",
+      "field": "deliveryDate",
+      "state": {
+        "title": "Workshop welcome kits",
+        "requirements": {
+          "budgetMinor": 65000,
+          "quantity": 100,
+          "currency": "USD",
+          "deliveryBy": "2026-11-14"
+        },
+        "quotes": [
+          {
+            "id": "cedar",
+            "supplier": "Cedar Print",
+            "source": "Cedar Print — supplier quote\nQuantity: 100 units\nUnit price: $5.40 USD\nShipping: $35.00 USD\nTax: $0.00 USD\nDelivery: November 13, 2026\nExclusions: design services are not included.",
+            "sourceHash": "4822fb831a73f05dad893358b968cdc97876afcb980248559228e641919a4dc5",
+            "fields": {
+              "quantity": {
+                "value": 100,
+                "locked": false,
+                "origin": "source",
+                "evidence": {
+                  "start": 29,
+                  "end": 48,
+                  "text": "Quantity: 100 units"
+                },
+                "note": null
+              },
+              "unitMinor": {
+                "value": 540,
+                "locked": false,
+                "origin": "source",
+                "evidence": {
+                  "start": 49,
+                  "end": 70,
+                  "text": "Unit price: $5.40 USD"
+                },
+                "note": null
+              },
+              "shippingMinor": {
+                "value": 3500,
+                "locked": false,
+                "origin": "source",
+                "evidence": {
+                  "start": 71,
+                  "end": 91,
+                  "text": "Shipping: $35.00 USD"
+                },
+                "note": null
+              },
+              "taxMinor": {
+                "value": 0,
+                "locked": false,
+                "origin": "source",
+                "evidence": {
+                  "start": 92,
+                  "end": 106,
+                  "text": "Tax: $0.00 USD"
+                },
+                "note": null
+              },
+              "currency": {
+                "value": "USD",
+                "locked": false,
+                "origin": "source",
+                "evidence": {
+                  "start": 49,
+                  "end": 70,
+                  "text": "Unit price: $5.40 USD"
+                },
+                "note": null
+              },
+              "deliveryDate": {
+                "value": "2026-11-18",
+                "locked": true,
+                "origin": "manual",
+                "evidence": null,
+                "note": "Supplier confirmed delivery moved to November 18."
+              }
+            },
+            "exclusions": [
+              {
+                "text": "Design services are not included",
+                "evidence": {
+                  "start": 135,
+                  "end": 180,
+                  "text": "Exclusions: design services are not included."
+                }
+              }
+            ],
+            "termsReviewed": true
+          },
+          {
+            "id": "harbor",
+            "supplier": "Harbor Studio",
+            "source": "Harbor Studio — supplier quote\nQuantity: 100 units\nUnit price: $5.15 USD\nShipping: $80.00 USD\nTax: $0.00 USD\nDelivery: November 12, 2026\nExclusions: design services are not included.",
+            "sourceHash": "5797089d4acfd4095342e6bc5dd1edf84ee8253c94d77340fd2950c16e72fbef",
+            "fields": {
+              "quantity": {
+                "value": 100,
+                "locked": false,
+                "origin": "source",
+                "evidence": {
+                  "start": 31,
+                  "end": 50,
+                  "text": "Quantity: 100 units"
+                },
+                "note": null
+              },
+              "unitMinor": {
+                "value": 515,
+                "locked": false,
+                "origin": "source",
+                "evidence": {
+                  "start": 51,
+                  "end": 72,
+                  "text": "Unit price: $5.15 USD"
+                },
+                "note": null
+              },
+              "shippingMinor": {
+                "value": 8000,
+                "locked": false,
+                "origin": "source",
+                "evidence": {
+                  "start": 73,
+                  "end": 93,
+                  "text": "Shipping: $80.00 USD"
+                },
+                "note": null
+              },
+              "taxMinor": {
+                "value": 0,
+                "locked": false,
+                "origin": "source",
+                "evidence": {
+                  "start": 94,
+                  "end": 108,
+                  "text": "Tax: $0.00 USD"
+                },
+                "note": null
+              },
+              "currency": {
+                "value": "USD",
+                "locked": false,
+                "origin": "source",
+                "evidence": {
+                  "start": 51,
+                  "end": 72,
+                  "text": "Unit price: $5.15 USD"
+                },
+                "note": null
+              },
+              "deliveryDate": {
+                "value": "2026-11-12",
+                "locked": false,
+                "origin": "source",
+                "evidence": {
+                  "start": 109,
+                  "end": 136,
+                  "text": "Delivery: November 12, 2026"
+                },
+                "note": null
+              }
+            },
+            "exclusions": [
+              {
+                "text": "Design services are not included",
+                "evidence": {
+                  "start": 137,
+                  "end": 182,
+                  "text": "Exclusions: design services are not included."
+                }
+              }
+            ],
+            "termsReviewed": true
+          },
+          {
+            "id": "rushline",
+            "supplier": "Rushline",
+            "source": "Rushline — supplier quote\nQuantity: 100 units\nUnit price: $6.25 USD\nShipping: free\nTax: $0.00 USD\nDelivery: November 9, 2026\nExclusions: design services are not included.",
+            "sourceHash": "7d3ab5e74e9bac49e694a4caaf932a5f013684e34ce130bb0c87bb7521918350",
+            "fields": {
+              "quantity": {
+                "value": 100,
+                "locked": false,
+                "origin": "source",
+                "evidence": {
+                  "start": 26,
+                  "end": 45,
+                  "text": "Quantity: 100 units"
+                },
+                "note": null
+              },
+              "unitMinor": {
+                "value": 625,
+                "locked": false,
+                "origin": "source",
+                "evidence": {
+                  "start": 46,
+                  "end": 67,
+                  "text": "Unit price: $6.25 USD"
+                },
+                "note": null
+              },
+              "shippingMinor": {
+                "value": 0,
+                "locked": false,
+                "origin": "source",
+                "evidence": {
+                  "start": 68,
+                  "end": 82,
+                  "text": "Shipping: free"
+                },
+                "note": null
+              },
+              "taxMinor": {
+                "value": 0,
+                "locked": false,
+                "origin": "source",
+                "evidence": {
+                  "start": 83,
+                  "end": 97,
+                  "text": "Tax: $0.00 USD"
+                },
+                "note": null
+              },
+              "currency": {
+                "value": "USD",
+                "locked": false,
+                "origin": "source",
+                "evidence": {
+                  "start": 46,
+                  "end": 67,
+                  "text": "Unit price: $6.25 USD"
+                },
+                "note": null
+              },
+              "deliveryDate": {
+                "value": "2026-11-09",
+                "locked": false,
+                "origin": "source",
+                "evidence": {
+                  "start": 98,
+                  "end": 124,
+                  "text": "Delivery: November 9, 2026"
+                },
+                "note": null
+              }
+            },
+            "exclusions": [
+              {
+                "text": "Design services are not included",
+                "evidence": {
+                  "start": 125,
+                  "end": 170,
+                  "text": "Exclusions: design services are not included."
+                }
+              }
+            ],
+            "termsReviewed": true
+          }
+        ]
+      },
+      "stateSHA256": "99f6f740f27943dbd715bf4f3a3ebc931ec6e2124470ddf9e19b493abb614549",
+      "recommendation": {
+        "winner": {
+          "id": "harbor",
+          "supplier": "Harbor Studio",
+          "totalMinor": 59500,
+          "deliveryDate": "2026-11-12",
+          "eligible": true,
+          "reasons": [],
+          "warnings": [
+            "Design services are not included"
+          ]
+        },
+        "assessments": [
+          {
+            "id": "cedar",
+            "supplier": "Cedar Print",
+            "totalMinor": 57500,
+            "deliveryDate": "2026-11-18",
+            "eligible": false,
+            "reasons": [
+              "Arrives after your deadline"
+            ],
+            "warnings": [
+              "Design services are not included",
+              "Includes your manual corrections"
+            ]
+          },
+          {
+            "id": "harbor",
+            "supplier": "Harbor Studio",
+            "totalMinor": 59500,
+            "deliveryDate": "2026-11-12",
+            "eligible": true,
+            "reasons": [],
+            "warnings": [
+              "Design services are not included"
+            ]
+          },
+          {
+            "id": "rushline",
+            "supplier": "Rushline",
+            "totalMinor": 62500,
+            "deliveryDate": "2026-11-09",
+            "eligible": true,
+            "reasons": [],
+            "warnings": [
+              "Design services are not included"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": "refresh",
+      "title": "Your correction survives a refresh",
+      "short": "Refresh source",
+      "detail": "Reapplying the date from Cedar's original quote preserves the locked correction. The old source still says November 13; your confirmed date stays November 18.",
+      "change": "Source refresh preserved the locked delivery date. Harbor stays selected.",
+      "operation": "applyExtraction",
+      "quote": "cedar",
+      "field": "deliveryDate",
+      "preserved": [
+        "deliveryDate"
+      ],
+      "state": {
+        "title": "Workshop welcome kits",
+        "requirements": {
+          "budgetMinor": 65000,
+          "quantity": 100,
+          "currency": "USD",
+          "deliveryBy": "2026-11-14"
+        },
+        "quotes": [
+          {
+            "id": "cedar",
+            "supplier": "Cedar Print",
+            "source": "Cedar Print — supplier quote\nQuantity: 100 units\nUnit price: $5.40 USD\nShipping: $35.00 USD\nTax: $0.00 USD\nDelivery: November 13, 2026\nExclusions: design services are not included.",
+            "sourceHash": "4822fb831a73f05dad893358b968cdc97876afcb980248559228e641919a4dc5",
+            "fields": {
+              "quantity": {
+                "value": 100,
+                "locked": false,
+                "origin": "source",
+                "evidence": {
+                  "start": 29,
+                  "end": 48,
+                  "text": "Quantity: 100 units"
+                },
+                "note": null
+              },
+              "unitMinor": {
+                "value": 540,
+                "locked": false,
+                "origin": "source",
+                "evidence": {
+                  "start": 49,
+                  "end": 70,
+                  "text": "Unit price: $5.40 USD"
+                },
+                "note": null
+              },
+              "shippingMinor": {
+                "value": 3500,
+                "locked": false,
+                "origin": "source",
+                "evidence": {
+                  "start": 71,
+                  "end": 91,
+                  "text": "Shipping: $35.00 USD"
+                },
+                "note": null
+              },
+              "taxMinor": {
+                "value": 0,
+                "locked": false,
+                "origin": "source",
+                "evidence": {
+                  "start": 92,
+                  "end": 106,
+                  "text": "Tax: $0.00 USD"
+                },
+                "note": null
+              },
+              "currency": {
+                "value": "USD",
+                "locked": false,
+                "origin": "source",
+                "evidence": {
+                  "start": 49,
+                  "end": 70,
+                  "text": "Unit price: $5.40 USD"
+                },
+                "note": null
+              },
+              "deliveryDate": {
+                "value": "2026-11-18",
+                "locked": true,
+                "origin": "manual",
+                "evidence": null,
+                "note": "Supplier confirmed delivery moved to November 18."
+              }
+            },
+            "exclusions": [
+              {
+                "text": "Design services are not included",
+                "evidence": {
+                  "start": 135,
+                  "end": 180,
+                  "text": "Exclusions: design services are not included."
+                }
+              }
+            ],
+            "termsReviewed": true
+          },
+          {
+            "id": "harbor",
+            "supplier": "Harbor Studio",
+            "source": "Harbor Studio — supplier quote\nQuantity: 100 units\nUnit price: $5.15 USD\nShipping: $80.00 USD\nTax: $0.00 USD\nDelivery: November 12, 2026\nExclusions: design services are not included.",
+            "sourceHash": "5797089d4acfd4095342e6bc5dd1edf84ee8253c94d77340fd2950c16e72fbef",
+            "fields": {
+              "quantity": {
+                "value": 100,
+                "locked": false,
+                "origin": "source",
+                "evidence": {
+                  "start": 31,
+                  "end": 50,
+                  "text": "Quantity: 100 units"
+                },
+                "note": null
+              },
+              "unitMinor": {
+                "value": 515,
+                "locked": false,
+                "origin": "source",
+                "evidence": {
+                  "start": 51,
+                  "end": 72,
+                  "text": "Unit price: $5.15 USD"
+                },
+                "note": null
+              },
+              "shippingMinor": {
+                "value": 8000,
+                "locked": false,
+                "origin": "source",
+                "evidence": {
+                  "start": 73,
+                  "end": 93,
+                  "text": "Shipping: $80.00 USD"
+                },
+                "note": null
+              },
+              "taxMinor": {
+                "value": 0,
+                "locked": false,
+                "origin": "source",
+                "evidence": {
+                  "start": 94,
+                  "end": 108,
+                  "text": "Tax: $0.00 USD"
+                },
+                "note": null
+              },
+              "currency": {
+                "value": "USD",
+                "locked": false,
+                "origin": "source",
+                "evidence": {
+                  "start": 51,
+                  "end": 72,
+                  "text": "Unit price: $5.15 USD"
+                },
+                "note": null
+              },
+              "deliveryDate": {
+                "value": "2026-11-12",
+                "locked": false,
+                "origin": "source",
+                "evidence": {
+                  "start": 109,
+                  "end": 136,
+                  "text": "Delivery: November 12, 2026"
+                },
+                "note": null
+              }
+            },
+            "exclusions": [
+              {
+                "text": "Design services are not included",
+                "evidence": {
+                  "start": 137,
+                  "end": 182,
+                  "text": "Exclusions: design services are not included."
+                }
+              }
+            ],
+            "termsReviewed": true
+          },
+          {
+            "id": "rushline",
+            "supplier": "Rushline",
+            "source": "Rushline — supplier quote\nQuantity: 100 units\nUnit price: $6.25 USD\nShipping: free\nTax: $0.00 USD\nDelivery: November 9, 2026\nExclusions: design services are not included.",
+            "sourceHash": "7d3ab5e74e9bac49e694a4caaf932a5f013684e34ce130bb0c87bb7521918350",
+            "fields": {
+              "quantity": {
+                "value": 100,
+                "locked": false,
+                "origin": "source",
+                "evidence": {
+                  "start": 26,
+                  "end": 45,
+                  "text": "Quantity: 100 units"
+                },
+                "note": null
+              },
+              "unitMinor": {
+                "value": 625,
+                "locked": false,
+                "origin": "source",
+                "evidence": {
+                  "start": 46,
+                  "end": 67,
+                  "text": "Unit price: $6.25 USD"
+                },
+                "note": null
+              },
+              "shippingMinor": {
+                "value": 0,
+                "locked": false,
+                "origin": "source",
+                "evidence": {
+                  "start": 68,
+                  "end": 82,
+                  "text": "Shipping: free"
+                },
+                "note": null
+              },
+              "taxMinor": {
+                "value": 0,
+                "locked": false,
+                "origin": "source",
+                "evidence": {
+                  "start": 83,
+                  "end": 97,
+                  "text": "Tax: $0.00 USD"
+                },
+                "note": null
+              },
+              "currency": {
+                "value": "USD",
+                "locked": false,
+                "origin": "source",
+                "evidence": {
+                  "start": 46,
+                  "end": 67,
+                  "text": "Unit price: $6.25 USD"
+                },
+                "note": null
+              },
+              "deliveryDate": {
+                "value": "2026-11-09",
+                "locked": false,
+                "origin": "source",
+                "evidence": {
+                  "start": 98,
+                  "end": 124,
+                  "text": "Delivery: November 9, 2026"
+                },
+                "note": null
+              }
+            },
+            "exclusions": [
+              {
+                "text": "Design services are not included",
+                "evidence": {
+                  "start": 125,
+                  "end": 170,
+                  "text": "Exclusions: design services are not included."
+                }
+              }
+            ],
+            "termsReviewed": true
+          }
+        ]
+      },
+      "stateSHA256": "99f6f740f27943dbd715bf4f3a3ebc931ec6e2124470ddf9e19b493abb614549",
+      "recommendation": {
+        "winner": {
+          "id": "harbor",
+          "supplier": "Harbor Studio",
+          "totalMinor": 59500,
+          "deliveryDate": "2026-11-12",
+          "eligible": true,
+          "reasons": [],
+          "warnings": [
+            "Design services are not included"
+          ]
+        },
+        "assessments": [
+          {
+            "id": "cedar",
+            "supplier": "Cedar Print",
+            "totalMinor": 57500,
+            "deliveryDate": "2026-11-18",
+            "eligible": false,
+            "reasons": [
+              "Arrives after your deadline"
+            ],
+            "warnings": [
+              "Design services are not included",
+              "Includes your manual corrections"
+            ]
+          },
+          {
+            "id": "harbor",
+            "supplier": "Harbor Studio",
+            "totalMinor": 59500,
+            "deliveryDate": "2026-11-12",
+            "eligible": true,
+            "reasons": [],
+            "warnings": [
+              "Design services are not included"
+            ]
+          },
+          {
+            "id": "rushline",
+            "supplier": "Rushline",
+            "totalMinor": 62500,
+            "deliveryDate": "2026-11-09",
+            "eligible": true,
+            "reasons": [],
+            "warnings": [
+              "Design services are not included"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": "budget",
+      "title": "An honest answer when nothing fits",
+      "short": "Tighten budget",
+      "detail": "At $590, Cedar is late and the other two offers exceed the budget. Shortlist leaves the decision unresolved and explains why.",
+      "change": "Budget: $650 → $590. Recommendation: Harbor → no eligible offer.",
+      "operation": "withRequirements",
+      "quote": "harbor",
+      "field": "unitMinor",
+      "state": {
+        "title": "Workshop welcome kits",
+        "requirements": {
+          "budgetMinor": 59000,
+          "quantity": 100,
+          "currency": "USD",
+          "deliveryBy": "2026-11-14"
+        },
+        "quotes": [
+          {
+            "id": "cedar",
+            "supplier": "Cedar Print",
+            "source": "Cedar Print — supplier quote\nQuantity: 100 units\nUnit price: $5.40 USD\nShipping: $35.00 USD\nTax: $0.00 USD\nDelivery: November 13, 2026\nExclusions: design services are not included.",
+            "sourceHash": "4822fb831a73f05dad893358b968cdc97876afcb980248559228e641919a4dc5",
+            "fields": {
+              "quantity": {
+                "value": 100,
+                "locked": false,
+                "origin": "source",
+                "evidence": {
+                  "start": 29,
+                  "end": 48,
+                  "text": "Quantity: 100 units"
+                },
+                "note": null
+              },
+              "unitMinor": {
+                "value": 540,
+                "locked": false,
+                "origin": "source",
+                "evidence": {
+                  "start": 49,
+                  "end": 70,
+                  "text": "Unit price: $5.40 USD"
+                },
+                "note": null
+              },
+              "shippingMinor": {
+                "value": 3500,
+                "locked": false,
+                "origin": "source",
+                "evidence": {
+                  "start": 71,
+                  "end": 91,
+                  "text": "Shipping: $35.00 USD"
+                },
+                "note": null
+              },
+              "taxMinor": {
+                "value": 0,
+                "locked": false,
+                "origin": "source",
+                "evidence": {
+                  "start": 92,
+                  "end": 106,
+                  "text": "Tax: $0.00 USD"
+                },
+                "note": null
+              },
+              "currency": {
+                "value": "USD",
+                "locked": false,
+                "origin": "source",
+                "evidence": {
+                  "start": 49,
+                  "end": 70,
+                  "text": "Unit price: $5.40 USD"
+                },
+                "note": null
+              },
+              "deliveryDate": {
+                "value": "2026-11-18",
+                "locked": true,
+                "origin": "manual",
+                "evidence": null,
+                "note": "Supplier confirmed delivery moved to November 18."
+              }
+            },
+            "exclusions": [
+              {
+                "text": "Design services are not included",
+                "evidence": {
+                  "start": 135,
+                  "end": 180,
+                  "text": "Exclusions: design services are not included."
+                }
+              }
+            ],
+            "termsReviewed": true
+          },
+          {
+            "id": "harbor",
+            "supplier": "Harbor Studio",
+            "source": "Harbor Studio — supplier quote\nQuantity: 100 units\nUnit price: $5.15 USD\nShipping: $80.00 USD\nTax: $0.00 USD\nDelivery: November 12, 2026\nExclusions: design services are not included.",
+            "sourceHash": "5797089d4acfd4095342e6bc5dd1edf84ee8253c94d77340fd2950c16e72fbef",
+            "fields": {
+              "quantity": {
+                "value": 100,
+                "locked": false,
+                "origin": "source",
+                "evidence": {
+                  "start": 31,
+                  "end": 50,
+                  "text": "Quantity: 100 units"
+                },
+                "note": null
+              },
+              "unitMinor": {
+                "value": 515,
+                "locked": false,
+                "origin": "source",
+                "evidence": {
+                  "start": 51,
+                  "end": 72,
+                  "text": "Unit price: $5.15 USD"
+                },
+                "note": null
+              },
+              "shippingMinor": {
+                "value": 8000,
+                "locked": false,
+                "origin": "source",
+                "evidence": {
+                  "start": 73,
+                  "end": 93,
+                  "text": "Shipping: $80.00 USD"
+                },
+                "note": null
+              },
+              "taxMinor": {
+                "value": 0,
+                "locked": false,
+                "origin": "source",
+                "evidence": {
+                  "start": 94,
+                  "end": 108,
+                  "text": "Tax: $0.00 USD"
+                },
+                "note": null
+              },
+              "currency": {
+                "value": "USD",
+                "locked": false,
+                "origin": "source",
+                "evidence": {
+                  "start": 51,
+                  "end": 72,
+                  "text": "Unit price: $5.15 USD"
+                },
+                "note": null
+              },
+              "deliveryDate": {
+                "value": "2026-11-12",
+                "locked": false,
+                "origin": "source",
+                "evidence": {
+                  "start": 109,
+                  "end": 136,
+                  "text": "Delivery: November 12, 2026"
+                },
+                "note": null
+              }
+            },
+            "exclusions": [
+              {
+                "text": "Design services are not included",
+                "evidence": {
+                  "start": 137,
+                  "end": 182,
+                  "text": "Exclusions: design services are not included."
+                }
+              }
+            ],
+            "termsReviewed": true
+          },
+          {
+            "id": "rushline",
+            "supplier": "Rushline",
+            "source": "Rushline — supplier quote\nQuantity: 100 units\nUnit price: $6.25 USD\nShipping: free\nTax: $0.00 USD\nDelivery: November 9, 2026\nExclusions: design services are not included.",
+            "sourceHash": "7d3ab5e74e9bac49e694a4caaf932a5f013684e34ce130bb0c87bb7521918350",
+            "fields": {
+              "quantity": {
+                "value": 100,
+                "locked": false,
+                "origin": "source",
+                "evidence": {
+                  "start": 26,
+                  "end": 45,
+                  "text": "Quantity: 100 units"
+                },
+                "note": null
+              },
+              "unitMinor": {
+                "value": 625,
+                "locked": false,
+                "origin": "source",
+                "evidence": {
+                  "start": 46,
+                  "end": 67,
+                  "text": "Unit price: $6.25 USD"
+                },
+                "note": null
+              },
+              "shippingMinor": {
+                "value": 0,
+                "locked": false,
+                "origin": "source",
+                "evidence": {
+                  "start": 68,
+                  "end": 82,
+                  "text": "Shipping: free"
+                },
+                "note": null
+              },
+              "taxMinor": {
+                "value": 0,
+                "locked": false,
+                "origin": "source",
+                "evidence": {
+                  "start": 83,
+                  "end": 97,
+                  "text": "Tax: $0.00 USD"
+                },
+                "note": null
+              },
+              "currency": {
+                "value": "USD",
+                "locked": false,
+                "origin": "source",
+                "evidence": {
+                  "start": 46,
+                  "end": 67,
+                  "text": "Unit price: $6.25 USD"
+                },
+                "note": null
+              },
+              "deliveryDate": {
+                "value": "2026-11-09",
+                "locked": false,
+                "origin": "source",
+                "evidence": {
+                  "start": 98,
+                  "end": 124,
+                  "text": "Delivery: November 9, 2026"
+                },
+                "note": null
+              }
+            },
+            "exclusions": [
+              {
+                "text": "Design services are not included",
+                "evidence": {
+                  "start": 125,
+                  "end": 170,
+                  "text": "Exclusions: design services are not included."
+                }
+              }
+            ],
+            "termsReviewed": true
+          }
+        ]
+      },
+      "stateSHA256": "fd3874d9f039b32fcf3173355a2e19204c4c2d7beea14a56f615fe09256c17cd",
+      "recommendation": {
+        "winner": null,
+        "assessments": [
+          {
+            "id": "cedar",
+            "supplier": "Cedar Print",
+            "totalMinor": 57500,
+            "deliveryDate": "2026-11-18",
+            "eligible": false,
+            "reasons": [
+              "Arrives after your deadline"
+            ],
+            "warnings": [
+              "Design services are not included",
+              "Includes your manual corrections"
+            ]
+          },
+          {
+            "id": "harbor",
+            "supplier": "Harbor Studio",
+            "totalMinor": 59500,
+            "deliveryDate": "2026-11-12",
+            "eligible": false,
+            "reasons": [
+              "Over your budget"
+            ],
+            "warnings": [
+              "Design services are not included"
+            ]
+          },
+          {
+            "id": "rushline",
+            "supplier": "Rushline",
+            "totalMinor": 62500,
+            "deliveryDate": "2026-11-09",
+            "eligible": false,
+            "reasons": [
+              "Over your budget"
+            ],
+            "warnings": [
+              "Design services are not included"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": "deadline",
+      "title": "Choose for the new deadline",
+      "short": "Need it sooner",
+      "detail": "Restore the $650 budget and require November 10 delivery. Rushline is the only offer that meets all the requirements. Cedar's correction is still locked.",
+      "change": "Budget: $590 → $650. Delivery: Nov 14 → Nov 10. Recommendation: Rushline.",
+      "operation": "withRequirements",
+      "quote": "rushline",
+      "field": "deliveryDate",
+      "state": {
+        "title": "Workshop welcome kits",
+        "requirements": {
+          "budgetMinor": 65000,
+          "quantity": 100,
+          "currency": "USD",
+          "deliveryBy": "2026-11-10"
+        },
+        "quotes": [
+          {
+            "id": "cedar",
+            "supplier": "Cedar Print",
+            "source": "Cedar Print — supplier quote\nQuantity: 100 units\nUnit price: $5.40 USD\nShipping: $35.00 USD\nTax: $0.00 USD\nDelivery: November 13, 2026\nExclusions: design services are not included.",
+            "sourceHash": "4822fb831a73f05dad893358b968cdc97876afcb980248559228e641919a4dc5",
+            "fields": {
+              "quantity": {
+                "value": 100,
+                "locked": false,
+                "origin": "source",
+                "evidence": {
+                  "start": 29,
+                  "end": 48,
+                  "text": "Quantity: 100 units"
+                },
+                "note": null
+              },
+              "unitMinor": {
+                "value": 540,
+                "locked": false,
+                "origin": "source",
+                "evidence": {
+                  "start": 49,
+                  "end": 70,
+                  "text": "Unit price: $5.40 USD"
+                },
+                "note": null
+              },
+              "shippingMinor": {
+                "value": 3500,
+                "locked": false,
+                "origin": "source",
+                "evidence": {
+                  "start": 71,
+                  "end": 91,
+                  "text": "Shipping: $35.00 USD"
+                },
+                "note": null
+              },
+              "taxMinor": {
+                "value": 0,
+                "locked": false,
+                "origin": "source",
+                "evidence": {
+                  "start": 92,
+                  "end": 106,
+                  "text": "Tax: $0.00 USD"
+                },
+                "note": null
+              },
+              "currency": {
+                "value": "USD",
+                "locked": false,
+                "origin": "source",
+                "evidence": {
+                  "start": 49,
+                  "end": 70,
+                  "text": "Unit price: $5.40 USD"
+                },
+                "note": null
+              },
+              "deliveryDate": {
+                "value": "2026-11-18",
+                "locked": true,
+                "origin": "manual",
+                "evidence": null,
+                "note": "Supplier confirmed delivery moved to November 18."
+              }
+            },
+            "exclusions": [
+              {
+                "text": "Design services are not included",
+                "evidence": {
+                  "start": 135,
+                  "end": 180,
+                  "text": "Exclusions: design services are not included."
+                }
+              }
+            ],
+            "termsReviewed": true
+          },
+          {
+            "id": "harbor",
+            "supplier": "Harbor Studio",
+            "source": "Harbor Studio — supplier quote\nQuantity: 100 units\nUnit price: $5.15 USD\nShipping: $80.00 USD\nTax: $0.00 USD\nDelivery: November 12, 2026\nExclusions: design services are not included.",
+            "sourceHash": "5797089d4acfd4095342e6bc5dd1edf84ee8253c94d77340fd2950c16e72fbef",
+            "fields": {
+              "quantity": {
+                "value": 100,
+                "locked": false,
+                "origin": "source",
+                "evidence": {
+                  "start": 31,
+                  "end": 50,
+                  "text": "Quantity: 100 units"
+                },
+                "note": null
+              },
+              "unitMinor": {
+                "value": 515,
+                "locked": false,
+                "origin": "source",
+                "evidence": {
+                  "start": 51,
+                  "end": 72,
+                  "text": "Unit price: $5.15 USD"
+                },
+                "note": null
+              },
+              "shippingMinor": {
+                "value": 8000,
+                "locked": false,
+                "origin": "source",
+                "evidence": {
+                  "start": 73,
+                  "end": 93,
+                  "text": "Shipping: $80.00 USD"
+                },
+                "note": null
+              },
+              "taxMinor": {
+                "value": 0,
+                "locked": false,
+                "origin": "source",
+                "evidence": {
+                  "start": 94,
+                  "end": 108,
+                  "text": "Tax: $0.00 USD"
+                },
+                "note": null
+              },
+              "currency": {
+                "value": "USD",
+                "locked": false,
+                "origin": "source",
+                "evidence": {
+                  "start": 51,
+                  "end": 72,
+                  "text": "Unit price: $5.15 USD"
+                },
+                "note": null
+              },
+              "deliveryDate": {
+                "value": "2026-11-12",
+                "locked": false,
+                "origin": "source",
+                "evidence": {
+                  "start": 109,
+                  "end": 136,
+                  "text": "Delivery: November 12, 2026"
+                },
+                "note": null
+              }
+            },
+            "exclusions": [
+              {
+                "text": "Design services are not included",
+                "evidence": {
+                  "start": 137,
+                  "end": 182,
+                  "text": "Exclusions: design services are not included."
+                }
+              }
+            ],
+            "termsReviewed": true
+          },
+          {
+            "id": "rushline",
+            "supplier": "Rushline",
+            "source": "Rushline — supplier quote\nQuantity: 100 units\nUnit price: $6.25 USD\nShipping: free\nTax: $0.00 USD\nDelivery: November 9, 2026\nExclusions: design services are not included.",
+            "sourceHash": "7d3ab5e74e9bac49e694a4caaf932a5f013684e34ce130bb0c87bb7521918350",
+            "fields": {
+              "quantity": {
+                "value": 100,
+                "locked": false,
+                "origin": "source",
+                "evidence": {
+                  "start": 26,
+                  "end": 45,
+                  "text": "Quantity: 100 units"
+                },
+                "note": null
+              },
+              "unitMinor": {
+                "value": 625,
+                "locked": false,
+                "origin": "source",
+                "evidence": {
+                  "start": 46,
+                  "end": 67,
+                  "text": "Unit price: $6.25 USD"
+                },
+                "note": null
+              },
+              "shippingMinor": {
+                "value": 0,
+                "locked": false,
+                "origin": "source",
+                "evidence": {
+                  "start": 68,
+                  "end": 82,
+                  "text": "Shipping: free"
+                },
+                "note": null
+              },
+              "taxMinor": {
+                "value": 0,
+                "locked": false,
+                "origin": "source",
+                "evidence": {
+                  "start": 83,
+                  "end": 97,
+                  "text": "Tax: $0.00 USD"
+                },
+                "note": null
+              },
+              "currency": {
+                "value": "USD",
+                "locked": false,
+                "origin": "source",
+                "evidence": {
+                  "start": 46,
+                  "end": 67,
+                  "text": "Unit price: $6.25 USD"
+                },
+                "note": null
+              },
+              "deliveryDate": {
+                "value": "2026-11-09",
+                "locked": false,
+                "origin": "source",
+                "evidence": {
+                  "start": 98,
+                  "end": 124,
+                  "text": "Delivery: November 9, 2026"
+                },
+                "note": null
+              }
+            },
+            "exclusions": [
+              {
+                "text": "Design services are not included",
+                "evidence": {
+                  "start": 125,
+                  "end": 170,
+                  "text": "Exclusions: design services are not included."
+                }
+              }
+            ],
+            "termsReviewed": true
+          }
+        ]
+      },
+      "stateSHA256": "5fee6aff03dbc3a8c66c756e6d84f90085afc7a4af7826c4ce4dcfe50408676d",
+      "recommendation": {
+        "winner": {
+          "id": "rushline",
+          "supplier": "Rushline",
+          "totalMinor": 62500,
+          "deliveryDate": "2026-11-09",
+          "eligible": true,
+          "reasons": [],
+          "warnings": [
+            "Design services are not included"
+          ]
+        },
+        "assessments": [
+          {
+            "id": "cedar",
+            "supplier": "Cedar Print",
+            "totalMinor": 57500,
+            "deliveryDate": "2026-11-18",
+            "eligible": false,
+            "reasons": [
+              "Arrives after your deadline"
+            ],
+            "warnings": [
+              "Design services are not included",
+              "Includes your manual corrections"
+            ]
+          },
+          {
+            "id": "harbor",
+            "supplier": "Harbor Studio",
+            "totalMinor": 59500,
+            "deliveryDate": "2026-11-12",
+            "eligible": false,
+            "reasons": [
+              "Arrives after your deadline"
+            ],
+            "warnings": [
+              "Design services are not included"
+            ]
+          },
+          {
+            "id": "rushline",
+            "supplier": "Rushline",
+            "totalMinor": 62500,
+            "deliveryDate": "2026-11-09",
+            "eligible": true,
+            "reasons": [],
+            "warnings": [
+              "Design services are not included"
+            ]
+          }
+        ]
+      }
+    }
+  ]
+}

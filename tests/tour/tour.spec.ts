@@ -1,0 +1,50 @@
+import { test, expect } from "@playwright/test";
+import { readFile, mkdir } from "node:fs/promises";
+
+test("source, locked correction, refresh, no-fit decision and exported evidence remain consistent", async ({ page }) => {
+  const errors: string[] = []; page.on("pageerror", error => errors.push(error.message));
+  await page.goto("/");
+  await expect(page.locator("#winner")).toHaveText("Cedar Print");
+  await expect(page.locator("#source-text mark")).toHaveText("Shipping: $80.00 USD");
+  await page.getByRole("button", { name: "Step 2: Correct & lock", exact: true }).click();
+  await expect(page.locator("#winner")).toHaveText("Harbor Studio");
+  await expect(page.locator("#correction-note")).toContainText("Supplier confirmed delivery moved to November 18.");
+  await expect(page.locator("#facts")).toContainText("Nov 18");
+  await expect(page.locator("#source-text")).toContainText("Delivery: November 13, 2026");
+  await page.getByRole("button", { name: "Step 3: Refresh source", exact: true }).click();
+  await expect(page.locator("#facts .lock")).toHaveText("Locked");
+  await expect(page.locator("#facts")).toContainText("Nov 18");
+  await expect(page.locator("#winner")).toHaveText("Harbor Studio");
+  await page.getByRole("button", { name: "Step 4: Tighten budget", exact: true }).click();
+  await expect(page.locator("#winner")).toHaveText("No offer meets every requirement");
+  await expect(page.locator("#rows")).toContainText("Over your budget");
+  const downloadEvent = page.waitForEvent("download");
+  await page.getByRole("button", { name: "Export this example", exact: false }).click();
+  const download = await downloadEvent;
+  expect(download.suggestedFilename()).toBe("shortlist-example-budget.json");
+  const path = await download.path(); expect(path).toBeTruthy();
+  const evidence = JSON.parse(await readFile(path!, "utf8"));
+  expect(evidence.mode).toBe("guided-fictional-domain-snapshots-no-agent");
+  expect(evidence.snapshot.recommendation.winner).toBeNull();
+  expect(evidence.snapshot.state.quotes[0].fields.deliveryDate.locked).toBe(true);
+  await page.getByRole("button", { name: "Undo tour step", exact: false }).click();
+  await expect(page.locator("#winner")).toHaveText("Harbor Studio");
+  await page.getByRole("button", { name: "Step 5: Need it sooner", exact: true }).click();
+  await expect(page.locator("#winner")).toHaveText("Rushline");
+  await expect(page.locator("#budget")).toHaveText("$650.00");
+  await expect(page.locator("#deadline")).toHaveText("Nov 10, 2026");
+  await expect(page.locator("#source-text mark")).toHaveText("Delivery: November 9, 2026");
+  expect(errors).toEqual([]);
+});
+
+test("public tour is explicit and usable on desktop and mobile", async ({ page }) => {
+  await page.goto("/"); await expect(page.locator("#winner")).toBeVisible();
+  await expect(page.getByText("Guided tour · fictional quotes", { exact: true })).toBeVisible();
+  await mkdir("reports", { recursive: true });
+  await page.screenshot({ path: "reports/shortlist-tour-desktop.png", fullPage: true });
+  await page.setViewportSize({ width: 390, height: 844 });
+  await page.getByRole("button", { name: "Step 2: Correct & lock", exact: true }).click();
+  await expect(page.locator("#winner")).toHaveText("Harbor Studio");
+  await page.screenshot({ path: "reports/shortlist-tour-mobile.png", fullPage: true });
+  expect(await page.evaluate(() => document.documentElement.scrollWidth <= window.innerWidth)).toBe(true);
+});

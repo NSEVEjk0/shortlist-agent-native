@@ -6,6 +6,8 @@ Shortlist compares supplier quotes against a budget, quantity, currency and deli
 
 ## A decision you can try
 
+The public [product tour](https://shortlist-buying.vercel.app) uses five preset fictional states recorded by the same domain engine as the private workspace. It includes source inspection, a locked correction, a source refresh, changed constraints, undo of a tour step and an example evidence export. It does not invoke a model or persist a user workspace. `npm run build:tour -- --check` verifies those committed snapshots against the engine; `npm run test:tour` checks the browser flow.
+
 The disclosed example contains three fictional quotes for 100 workshop kits:
 
 | Supplier | Total, including shipping and stated tax | Delivery |
@@ -49,6 +51,8 @@ The sponsored agent is disabled by default. When an operator enables it, the ser
 ## Deployment
 
 The production deployment needs DATABASE_URL for persistent PostgreSQL and BETTER_AUTH_SECRET for stable sessions. Apply migrations before promotion. The framework's documented Vercel build uses NITRO_PRESET=vercel; Node/Docker hosting is also supported.
+
+The separate public tour deploys only the contents of `preview/`, with its nested Vercel configuration. That static configuration is not a deployment of the Agent-Native application. Production database/model connection and a public Clips recording are still required for the contest entry.
 
 Build and integration verification status is recorded by GitHub Actions. A public Builder.io Clips recording is an additional contest requirement; a repository or deployment alone does not complete the entry.
 

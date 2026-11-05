@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Compare supplier quotes, keep your corrections, and choose with the evidence in view. Explore Shortlist's guided product tour.">
+  <meta name="theme-color" content="#185c3d"><title>Shortlist — Choose with the whole picture</title>
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml"><link rel="stylesheet" href="/style.css"><script src="/app.js" type="module"></script>
+</head>
+<body>
+  <a class="skip" href="#workspace">Skip to the product tour</a>
+  <header><a class="brand" href="/" aria-label="Shortlist home"><span class="mark" aria-hidden="true">S<span>↗</span></span>Shortlist<span class="brand-dot">.</span></a><nav aria-label="Main"><a href="#workspace">Product tour</a><a href="https://github.com/NSEVEjk0/shortlist-agent-native" target="_blank" rel="noopener noreferrer">Source ↗</a></nav><span class="header-note">A clearer buying decision</span></header>
+  <main>
+    <section class="hero">
+      <div><p class="eyebrow">THE RIGHT QUOTE. ALL THE CONTEXT.</p><h1>Choose with the<br><span>whole picture.</span></h1><p class="hero-copy">Three quotes. Different shipping costs. A delivery date that changed. Bring the facts, your corrections and the buying decision into one place.</p><a class="button primary" href="#workspace">Take the product tour <span aria-hidden="true">↗</span></a><p class="fine hero-fine">Source-linked decisions. Human corrections. One shared workspace.</p></div>
+      <div class="hero-sheet" aria-label="An example of complete quote cost"><div class="sheet-label"><span class="tiny-dot"></span> THE COST BEHIND THE QUOTE</div><div class="sheet-suppliers"><div><span>Harbor Studio</span><strong>$5.15<span> / unit</span></strong><small>100 units + $80 shipping</small></div><span class="sheet-arrow" aria-hidden="true">→</span><div class="sheet-total"><small>Complete cost</small><strong>$595</strong></div></div><div class="sheet-rule"></div><div class="sheet-suppliers"><div><span>Cedar Print</span><strong>$5.40<span> / unit</span></strong><small>100 units + $35 shipping</small></div><span class="sheet-arrow" aria-hidden="true">→</span><div class="sheet-total"><small>Complete cost</small><strong>$575</strong></div></div><div class="sheet-bottom">Lowest unit price ≠ lowest complete cost.<span>Fictional example</span></div></div>
+    </section>
+    <section id="workspace" class="workspace" tabindex="-1" aria-label="Guided supplier decision tour">
+      <div class="section-intro"><div><p class="eyebrow">SEE THE DECISION CHANGE</p><h2>A little context changes everything.</h2></div><span class="tour-tag">Guided tour · fictional quotes</span></div>
+      <p class="tour-disclosure">These five preset steps use outputs recorded from Shortlist's real decision engine. The private Agent-Native workspace needs its database and model connection before live use.</p>
+      <div id="loading" class="loading" role="status">Loading the quote evidence…</div>
+      <div id="tour" hidden>
+        <div id="steps" class="steps" role="group" aria-label="Tour steps"></div>
+        <div class="desk">
+          <div class="desk-top"><div><p class="eyebrow">SUPPLIER DECISION</p><h3>Workshop welcome kits</h3><p>100 units · USD · all quoted exclusions in view</p></div><button id="export" class="button">Export this example <span aria-hidden="true">↓</span></button></div>
+          <div class="requirements" aria-label="Current requirements"><div><span>Budget</span><strong id="budget"></strong></div><div><span>Deliver by</span><strong id="deadline"></strong></div><div><span>Quantity</span><strong>100 units</strong></div><div><span>Currency</span><strong>USD</strong></div></div>
+          <div class="recommendation" id="recommendation" role="status" aria-live="polite"><div id="rec-icon" class="rec-icon" aria-hidden="true">✓</div><div><p class="eyebrow">RECOMMENDED FOR THESE REQUIREMENTS</p><h4 id="winner"></h4><p id="winner-detail"></p></div><span id="snapshot" class="snapshot"></span></div>
+          <div class="change"><p id="change"></p><button id="undo" class="text-button">Undo tour step ↶</button></div>
+          <div class="work-columns">
+            <div class="comparison"><div class="panel-head"><h4>Compare the whole quote</h4><span>3 suppliers</span></div><div class="table-scroll"><table><caption class="sr-only">Supplier totals, dates and eligibility against the current requirements</caption><thead><tr><th scope="col">Supplier</th><th scope="col">Unit price</th><th scope="col">Shipping</th><th scope="col">Total</th><th scope="col">Delivery</th><th scope="col">Fit</th></tr></thead><tbody id="rows"></tbody></table></div><div class="panel-head facts-heading"><h4 id="facts-title"></h4><span>Click a fact to inspect its source</span></div><div id="facts" class="facts"></div><div id="exclusions" class="exclusions"></div></div>
+            <aside class="source" aria-label="Original supplier quote"><div class="panel-head"><h4>Original quote</h4><span>Evidence in view</span></div><div class="document-title"><strong id="source-title"></strong><span>TEXT · FICTIONAL</span></div><pre id="source-text"></pre><div class="source-foot"><span id="source-status"></span><p id="correction-note"></p><p class="hash-label">Source SHA-256 <code id="source-hash"></code></p></div></aside>
+          </div>
+          <div class="step-story"><div><p id="step-counter" class="eyebrow"></p><h4 id="step-title"></h4><p id="step-detail"></p></div><button id="next" class="button primary">Next step <span aria-hidden="true">→</span></button></div>
+        </div>
+      </div>
+    </section>
+    <section class="benefits" aria-label="Why Shortlist"><div><p class="eyebrow">01 / THE FACTS</p><h2>See the real cost.</h2><p>Unit price, quantity, shipping and tax make the total. Every source-backed fact points to its exact quote excerpt.</p></div><div><p class="eyebrow">02 / YOUR JUDGMENT</p><h2>Keep your corrections.</h2><p>Record what the supplier told you and lock the field. A fresh extraction preserves the correction and its reason.</p></div><div><p class="eyebrow">03 / THE DECISION</p><h2>Change it together.</h2><p>In the private workspace, the interface and agent share the same actions, constraints and versioned decision history.</p></div></section>
+    <section class="launch-note"><div><p class="eyebrow">THE PRIVATE WORKSPACE</p><h2>One decision. Human and agent.</h2></div><div><p>The full application includes authenticated accounts, persistent PostgreSQL, shared Agent-Native actions, contextual chat, version checks and undo. This public tour uses preset fictional states and runs no model calls.</p><a href="https://github.com/NSEVEjk0/shortlist-agent-native#run-and-verify" target="_blank" rel="noopener noreferrer">Explore the workspace and verification ↗</a></div></section>
+  </main>
+  <footer><a class="brand" href="/">Shortlist<span class="brand-dot">.</span></a><span>Choose with confidence. Keep the reasoning.</span><a href="https://github.com/NSEVEjk0/shortlist-agent-native" target="_blank" rel="noopener noreferrer">Built with Agent-Native ↗</a></footer>
+</body>
+</html>

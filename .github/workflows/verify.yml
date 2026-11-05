@@ -39,6 +39,8 @@ jobs:
       - run: npm run agent-native:doctor
       - run: npm run migrate:production
       - run: npm test
+      - run: npm run build:tour -- --check
+      - run: node --check preview/app.js
       - run: npm run build
         env:
           NITRO_PRESET: node-server
@@ -46,6 +48,7 @@ jobs:
       - run: npm run test:browser
         env:
           DEBUG: pw:webserver
+      - run: npm run test:tour
       - uses: actions/upload-artifact@v4
         if: always()
         with:
