@@ -32,6 +32,24 @@ test("concurrent writes with the same version commit exactly one change and one 
   assert.ok([59000, 60000].includes(view.state.requirements.budgetMinor));
 });
 
+test("a committed PostgreSQL JSONB change returns a verified receipt", async () => {
+  const id = await fixture();
+  const result = await mutateDecision({ id, expectedVersion: 1, ctx, kind: "requirements", summary: "Changed budget", change: () => withRequirements(sampleDecision(), { budgetMinor: 59000 }) });
+  assert.equal(result.state.requirements.budgetMinor, 59000);
+  assert.equal(result._receipt.changed, true);
+  assert.equal(result._receipt.verified, true);
+  assert.deepEqual(result._receipt.checks, [{ id: "committed-state", ok: true }]);
+  assert.equal((await readDecision(id, owner)).version, 2);
+});
+
+test("equivalent content reconstructed after JSONB storage creates no change or event", async () => {
+  const id = await fixture();
+  await assert.rejects(mutateDecision({ id, expectedVersion: 1, ctx, kind: "requirements", summary: "Same values", change: () => sampleDecision() }), error => typeof error === "object" && error !== null && "errorCode" in error && error.errorCode === "no_change");
+  const view = await readDecision(id, owner);
+  assert.equal(view.version, 1);
+  assert.equal(view.events.length, 0);
+});
+
 test("private reads and writes fail closed for other owners or absent sessions", async () => {
   const id = await fixture();
   await assert.rejects(readDecision(id, "another-owner@example.invalid"), error => typeof error === "object" && error !== null && "errorCode" in error && error.errorCode === "not_found");

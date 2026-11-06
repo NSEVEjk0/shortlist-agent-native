@@ -1,17 +1,25 @@
 import { defineAction } from "@agent-native/core/action";
 import { z } from "zod";
-import { idSchema, quoteIdSchema, quoteSchema } from "../server/action-schemas.ts";
+import { evidenceSchema, idSchema, quoteIdSchema, quoteSchema } from "../server/action-schemas.ts";
 import { decisionErrors } from "../server/action-errors.ts";
 import { readDecision, requireOwner } from "../server/store.ts";
 export default defineAction({
   description: "Read one supplier's original quote, exact source hash, extracted fields and human locks before applying extraction.",
   schema: z.object({ id: idSchema, quoteId: quoteIdSchema }),
-  outputSchema: z.object({ id: z.string(), version: z.number(), quote: quoteSchema }), errors: decisionErrors,
+  outputSchema: z.object({ id: z.string(), version: z.number(), quote: quoteSchema,
+    sourceLines: z.array(evidenceSchema).max(200).describe("Literal source lines with exact UTF-16 offsets, for citations. These are text spans, not extracted facts or interpretations."),
+  }), errors: decisionErrors,
   http: { method: "GET" }, readOnly: true,
   run: async ({ id, quoteId }, ctx) => {
     const view = await readDecision(id, requireOwner(ctx));
     const quote = view.state.quotes.find(item => item.id === quoteId);
     if (!quote) return decisionErrors.fail("That quote was not found.", "not_found", { statusCode: 404 });
-    return { id, version: view.version, quote };
+    let start = 0;
+    const sourceLines = quote.source.split("\n").flatMap(text => {
+      const span = { start, end: start + text.length, text };
+      start += text.length + 1;
+      return text.length > 0 && text.length <= 1000 ? [span] : [];
+    }).slice(0, 200);
+    return { id, version: view.version, quote, sourceLines };
   },
 });

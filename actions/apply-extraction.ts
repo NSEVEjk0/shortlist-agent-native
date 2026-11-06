@@ -11,7 +11,7 @@ export default defineAction({
     id: idSchema, quoteId: quoteIdSchema, expectedVersion: versionSchema,
     sourceHash: z.string().length(64).describe("Current SHA-256 sourceHash from get-quote"),
     extraction: z.object({
-      fields: z.object({ quantity: extracted.optional(), unitMinor: extracted.optional(), shippingMinor: extracted.optional(), taxMinor: extracted.optional(), currency: extracted.optional(), deliveryDate: extracted.optional() }).describe("Only explicitly stated facts; cents for amounts and YYYY-MM-DD for dates"),
+      fields: z.object({ quantity: extracted.optional(), unitMinor: extracted.optional(), shippingMinor: extracted.optional(), taxMinor: extracted.optional(), currency: extracted.optional(), deliveryDate: extracted.optional() }).describe("Only explicitly stated source facts; omit every locked field returned by get-quote. Never cite a manual correction. Cents for amounts and YYYY-MM-DD for dates"),
       exclusions: exclusionsSchema, termsReviewed: z.boolean().describe("True only after reading the full source for exclusions; cite any exclusions found"),
     }),
   }),

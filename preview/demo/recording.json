@@ -1,0 +1,83 @@
+{
+  "completed": true,
+  "fictional_supplier_quotes": true,
+  "actual_framework_agent_review": true,
+  "live_write_receipts": [
+    {
+      "tool": "apply-extraction",
+      "receipt": {
+        "changed": true,
+        "verified": true,
+        "summary": "Applied source-linked facts; preserved manual locks",
+        "subject": "99e43faf-3be8-471b-a1d4-9d748a43fe5d",
+        "checks": [
+          {
+            "id": "committed-state",
+            "ok": true
+          }
+        ]
+      }
+    }
+  ],
+  "narration": "Synthetic voice added with Microsoft Edge TTS",
+  "source_sha256": "bf5254713530f0d590b72e444c4b63382b5e33321f575cdbaba7b901ab98fd2f",
+  "mp4_sha256": "9ea6536c729fcc87163d32b94821f89b7be432167b9ead442b0e2d4d19462128",
+  "duration_seconds": 54.513985,
+  "scenes": [
+    {
+      "index": 0,
+      "source_start_seconds": 0,
+      "source_end_seconds": 4.075,
+      "film_start_seconds": 0,
+      "film_seconds": 7.8500000000000005,
+      "narration_seconds": 7.2,
+      "text": "Shortlist helps you compare supplier quotes and choose one that meets your budget and deadline. These three quotes are fictional."
+    },
+    {
+      "index": 1,
+      "source_start_seconds": 4.075,
+      "source_end_seconds": 5.432,
+      "film_start_seconds": 7.8500000000000005,
+      "film_seconds": 3.602,
+      "narration_seconds": 2.952,
+      "text": "Click a price to see the exact words it came from."
+    },
+    {
+      "index": 2,
+      "source_start_seconds": 5.432,
+      "source_end_seconds": 7.268,
+      "film_start_seconds": 11.452,
+      "film_seconds": 6.65,
+      "narration_seconds": 6.0,
+      "text": "Cedar confirms a delay. I correct the date and lock it, so Harbor becomes the suitable choice."
+    },
+    {
+      "index": 3,
+      "source_start_seconds": 7.268,
+      "source_end_seconds": 26.561,
+      "film_start_seconds": 18.102,
+      "film_seconds": 19.293,
+      "narration_seconds": 12.456,
+      "text": "Now Cedar sends a new quote. A real agent reads it and saves the new price and shipping. My locked date stays. The updated facts appear in the comparison, and Shortlist verifies the saved change."
+    },
+    {
+      "index": 4,
+      "source_start_seconds": 26.561,
+      "source_end_seconds": 29.179,
+      "film_start_seconds": 37.394999999999996,
+      "film_seconds": 7.058000000000001,
+      "narration_seconds": 6.408,
+      "text": "Reloading keeps the correction. Lowering the budget to five hundred ninety dollars leaves no suitable offer."
+    },
+    {
+      "index": 5,
+      "source_start_seconds": 29.179,
+      "source_end_seconds": 33.04,
+      "film_start_seconds": 44.452999999999996,
+      "film_seconds": 10.034,
+      "narration_seconds": 9.384,
+      "text": "Undo restores the earlier budget. Export downloads the decision and its original quote evidence. This recording shows the actual working application."
+    }
+  ],
+  "public_clips_link": null
+}

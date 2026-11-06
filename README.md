@@ -10,6 +10,8 @@ The cheapest-looking quote can omit tax, miss the deadline or contradict a corre
 
 ## A decision you can try
 
+The [recorded application demo](https://shortlist-buying.vercel.app/demo/) shows the actual private app using fictional quotes and one genuine framework agent review. It includes a source refresh, saved extraction with a verified PostgreSQL receipt, a preserved buyer lock, reload, changed budget, undo and export. The video has synthetic narration and English captions. Publication in Builder.io Clips remains pending.
+
 The public [product tour](https://shortlist-buying.vercel.app) uses five preset fictional states recorded by the same domain engine as the private workspace. It includes source inspection, a locked correction, a source refresh, changed constraints, undo of a tour step and an example evidence export. It does not invoke a model or persist a user workspace. `npm run build:tour -- --check` verifies those committed snapshots against the engine; `npm run test:tour` checks the browser flow.
 
 The disclosed example contains three fictional quotes for 100 workshop kits:
@@ -56,7 +58,7 @@ The sponsored agent is disabled by default. When an operator enables it, the ser
 
 The production deployment needs DATABASE_URL for persistent PostgreSQL and BETTER_AUTH_SECRET for stable sessions. Apply migrations before promotion. The framework's documented Vercel build uses NITRO_PRESET=vercel; Node/Docker hosting is also supported.
 
-The separate public tour deploys only the contents of `preview/`, with its nested Vercel configuration. That static configuration is not a deployment of the Agent-Native application. Production database/model connection and a public Clips recording are still required for the contest entry.
+The separate public tour and recorded demonstration deploy only the contents of `preview/`, with its nested Vercel configuration. The authenticated Agent-Native application runs privately on persistent PostgreSQL with a connected NEAR AI model. Its buying workflow and real agent review have passed browser verification. A public Builder.io Clips recording is still required for the contest entry.
 
 Build and integration verification status is recorded by GitHub Actions. A public Builder.io Clips recording is an additional contest requirement; a repository or deployment alone does not complete the entry.
 

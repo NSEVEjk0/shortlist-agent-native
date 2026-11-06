@@ -2,7 +2,7 @@
   "schema": "shortlist-tour-v1",
   "mode": "guided-fictional-domain-snapshots-no-agent",
   "engine": {
-    "domainSHA256": "6687098444cb9244e1a8988f2c9947cdab56d0d28d05f2f6f6251a0fb7b04e6d",
+    "domainSHA256": "ea3c73ecd6142e95eaf043f313be5e6ee3f9c96acd9d4d6894208f16192f53ed",
     "typesSHA256": "f962f2acdb7dad54ea74b163a7eec0d94dcf0b64e3424ae985f0272ada82368f"
   },
   "steps": [
@@ -281,7 +281,7 @@
           }
         ]
       },
-      "stateSHA256": "b60ee6d06a59b3ac24b5fae50f5907732f6f13e529cb17ee3891cfe826c5f2dd",
+      "stateSHA256": "47be5bd25d1be88cc023a55074ae5d9180a683818ff297c87a1922d19ef43559",
       "recommendation": {
         "winner": {
           "id": "cedar",
@@ -602,7 +602,7 @@
           }
         ]
       },
-      "stateSHA256": "99f6f740f27943dbd715bf4f3a3ebc931ec6e2124470ddf9e19b493abb614549",
+      "stateSHA256": "406a7e527464949a8529388ba4c565b8cda53476a1200c38f7f69db92ae887a2",
       "recommendation": {
         "winner": {
           "id": "harbor",
@@ -929,7 +929,7 @@
           }
         ]
       },
-      "stateSHA256": "99f6f740f27943dbd715bf4f3a3ebc931ec6e2124470ddf9e19b493abb614549",
+      "stateSHA256": "406a7e527464949a8529388ba4c565b8cda53476a1200c38f7f69db92ae887a2",
       "recommendation": {
         "winner": {
           "id": "harbor",
@@ -1253,7 +1253,7 @@
           }
         ]
       },
-      "stateSHA256": "fd3874d9f039b32fcf3173355a2e19204c4c2d7beea14a56f615fe09256c17cd",
+      "stateSHA256": "896f0e98fa51eb49c3cc8cc5b34a14b93b5f208bf3e350818c6a9d3daf6224ff",
       "recommendation": {
         "winner": null,
         "assessments": [
@@ -1571,7 +1571,7 @@
           }
         ]
       },
-      "stateSHA256": "5fee6aff03dbc3a8c66c756e6d84f90085afc7a4af7826c4ce4dcfe50408676d",
+      "stateSHA256": "f58df1cc3c90a1dc88706afbc0571e910742add4e2ab46e0b796c006f25e7ab2",
       "recommendation": {
         "winner": {
           "id": "rushline",

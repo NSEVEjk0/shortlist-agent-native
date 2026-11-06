@@ -1,10 +1,28 @@
 import test from "node:test";
 import assert from "node:assert/strict";
-import { applyExtraction, changeQuote, correctField, DecisionError, excerpt, newQuote, recommend, replaceSource, sampleDecision, validDate, withRequirements } from "../server/domain.ts";
+import { applyExtraction, changeQuote, correctField, DecisionError, excerpt, newQuote, recommend, replaceSource, sampleDecision, stateHash, validDate, withRequirements } from "../server/domain.ts";
 import { moneyInput } from "../shared/format.ts";
 import type { DecisionState, Extraction } from "../shared/types.ts";
 
 function quoteAt(state: DecisionState, index: number) { const quote = state.quotes[index]; assert.ok(quote); return quote; }
+
+test("state fingerprints survive reordered JSON object properties without ignoring content or array order", () => {
+  const original = sampleDecision();
+  const reordered = JSON.parse(JSON.stringify(original, (_key, value) => {
+    if (value && typeof value === "object" && !Array.isArray(value)) return Object.fromEntries(Object.entries(value).reverse());
+    return value;
+  })) as DecisionState;
+  assert.deepEqual(reordered, original);
+  assert.notEqual(JSON.stringify(reordered), JSON.stringify(original));
+  assert.equal(stateHash(reordered), stateHash(original));
+  assert.notEqual(stateHash(withRequirements(original, { budgetMinor: 59000 })), stateHash(original));
+  const editedSource = structuredClone(original);
+  quoteAt(editedSource, 0).source += "\n";
+  assert.notEqual(stateHash(editedSource), stateHash(original));
+  const reorderedQuotes = structuredClone(original);
+  reorderedQuotes.quotes.reverse();
+  assert.notEqual(stateHash(reorderedQuotes), stateHash(original));
+});
 
 test("a complete decision changes supplier as constraints change while a human correction survives", () => {
   let state = sampleDecision();
