@@ -4,6 +4,10 @@
 
 Shortlist compares supplier quotes against a budget, quantity, currency and delivery deadline. You can inspect where a fact came from, correct a supplier's date, lock that correction and change the requirements without restarting the decision. The buying agent uses the same actions and PostgreSQL state as the interface.
 
+## Problem and solution
+
+The cheapest-looking quote can omit tax, miss the deadline or contradict a correction the buyer already made. Shortlist keeps the original source, complete cost and protected human corrections beside the recommendation. The agent and buyer operate the same decision rather than maintaining separate answers.
+
 ## A decision you can try
 
 The public [product tour](https://shortlist-buying.vercel.app) uses five preset fictional states recorded by the same domain engine as the private workspace. It includes source inspection, a locked correction, a source refresh, changed constraints, undo of a tour step and an example evidence export. It does not invoke a model or persist a user workspace. `npm run build:tour -- --check` verifies those committed snapshots against the engine; `npm run test:tour` checks the browser flow.
@@ -39,7 +43,7 @@ Writes lock the aggregate row, reject stale versions, update state and insert an
 
 Node 22.22 or newer is required.
 
-1. Install dependencies with npm install.
+1. Install the locked dependencies with npm ci --no-audit --no-fund.
 2. Copy .env.example to .env and generate a stable BETTER_AUTH_SECRET. For local development, PGlite is supported. Hosted deployments require persistent PostgreSQL.
 3. Run npm run dev. Open the URL, create an account and try the example.
 4. Configure a supported model connection through the framework settings. Quote text and conversation leave the app for that connected provider when the agent runs.
@@ -61,3 +65,5 @@ Build and integration verification status is recorded by GitHub Actions. A publi
 The first workflow accepts pasted text or CSV. Currency conversion, PDF extraction, purchasing and supplier messaging are outside this version. Exact citations verify that evidence exists in the source; they do not prove a natural-language interpretation is correct. Manual corrections are buyer assertions. Review the source and supplier terms before making a purchase.
 
 MIT. The application scaffold comes from Builder.io's MIT-licensed Agent-Native project; application behavior was developed for Shortlist during the hackathon window.
+
+See [submission and demo preparation](SUBMISSION.md) for the required public Builder.io Clips recording and remaining live checks.
