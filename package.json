@@ -60,7 +60,7 @@
     "typescript": "7.0.2",
     "fast-check": "4.10.2"
   },
-  "description": "Source-linked supplier decisions with shared human and agent actions.",
+  "description": "Shortlist helps you compare supplier quotes, check their sources and keep your corrections.",
   "engines": {
     "node": ">=22.22.0"
   },

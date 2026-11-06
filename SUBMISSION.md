@@ -4,22 +4,22 @@
 
 Supplier quotes hide differences in cost and delivery, while buyers’ corrections can disappear in a fresh AI answer. Shortlist compares complete costs and deadlines with exact source excerpts, protected human corrections and an inspectable decision trail. The person and framework agent use the same registered actions and persistent decision state.
 
-The public [tour](https://shortlist-buying.vercel.app) is a disclosed fictional engine recording. The real application needs authenticated PostgreSQL storage and a working Agent-Native model connection. The completed CI checks include actions/storage, migrations, typecheck, doctor, build and browser workflows. The local VPS startup and a genuine agent interaction still need confirmation.
+The [working application](https://shortlist.139.84.249.47.sslip.io/home) is accessible over HTTPS with authenticated accounts, PostgreSQL and a connected NEAR AI model. Its real framework agent review saved facts with a verified committed receipt and preserved a buyer's locked delivery correction through reload. Public sign-up, saved corrections, reload, changed budget, undo, export, mobile layout and rejection of unauthenticated reads passed browser checks. The separate [tour](https://shortlist-buying.vercel.app) is a disclosed fictional engine recording. Domain, storage/actions, typecheck, doctor and production build checks passed locally.
 
 PDF extraction, currency conversion, purchasing and supplier messaging are outside this version. A citation proves source text exists; the buyer must still review its interpretation.
 
 ## Required deliverables
 
 - A functional Agent-Native app and disclosure of the official 0.223.0 scaffold and event-specific development.
-- A **public Builder.io Clips recording viewable without signing in**. A generic uploaded video does not replace this named requirement.
+- A **public Builder.io Clips recording viewable without signing in**: [verified public recording](https://clips.agent-native.com/share/Vh5lcfDQTQX1). It opens signed out, plays with sound and matches the reviewed 54.5-second application film.
 - Genuine human submission by **10 November 2026, 07:59 UTC**.
 - [Public repository](https://github.com/NSEVEjk0/shortlist-agent-native) and tour are prepared. A separate slide deck is optional and is not being created.
 
 Sources: [official rules](https://www.builder.io/hackathon/rules), [submission form](https://www.builder.io/hackathon/submit).
 
-## Required Clips recording: 55 seconds maximum
+## Completed Clips recording
 
-Record the authenticated application with an actual framework agent interaction. The fictional quotes are suitable demo inputs when their origin stays clear. Preserve the actual buyer correction; do not script a pretend model response.
+The completed recording uses the authenticated application, disclosed fictional quotes and an actual framework agent interaction. Synthetic narration was added to the real footage. [The public player](https://shortlist-buying.vercel.app/demo/) also has English captions and an MP4 download.
 
 | Time | Show | Explain |
 | --- | --- | --- |
@@ -29,7 +29,7 @@ Record the authenticated application with an actual framework agent interaction.
 | 33–44 s | Budget/deadline change and resulting recommendation or no-fit reason | Requirements change without losing the decision trail. |
 | 44–55 s | Undo/export and source repository | This version handles pasted text/CSV and requires human review of interpretation. |
 
-Keep the recording under 60 seconds. Verify its public Clips URL in a signed-out browser before entry. No optional second video is needed.
+The film is under 60 seconds and its public Clips URL has passed signed-out browser verification. It includes real saved agent facts, source inspection, a preserved correction, reload, changed requirements, undo and export. No further model review or Clips upload is needed to use this recording.
 
 ## Announcement draft
 

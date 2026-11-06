@@ -45,3 +45,4 @@ test-results/
 .vercel/
 .env
 .env.local
+preview/source.zip

@@ -1,18 +1,30 @@
 # Shortlist
 
-**Choose a supplier with the facts, sources and your corrections in one place.**
+**Compare supplier quotes. Check the facts. Keep your corrections.**
 
-Shortlist compares supplier quotes against a budget, quantity, currency and delivery deadline. You can inspect where a fact came from, correct a supplier's date, lock that correction and change the requirements without restarting the decision. The buying agent uses the same actions and PostgreSQL state as the interface.
+Shortlist helps you choose a supplier by comparing their quotes against your budget, order size and delivery deadline. It shows the complete price, explains why an offer fits or fails, and lets you check the original quote. If you correct a fact, such as a delivery date, you can lock it so the AI keeps your correction when it updates the comparison.
+
+[Open Shortlist](https://shortlist.139.84.249.47.sslip.io/home) · [Watch the public Builder.io Clips demo](https://clips.agent-native.com/share/Vh5lcfDQTQX1) · [Explore the guided tour](https://shortlist-buying.vercel.app) · [Download the narrated video](https://shortlist-buying.vercel.app/demo/shortlist-demo.mp4)
+
+![Shortlist's supplier comparison in the recorded application](preview/demo/poster.jpg)
 
 ## Problem and solution
 
-The cheapest-looking quote can omit tax, miss the deadline or contradict a correction the buyer already made. Shortlist keeps the original source, complete cost and protected human corrections beside the recommendation. The agent and buyer operate the same decision rather than maintaining separate answers.
+You need 100 workshop kits. Three suppliers send quotes with different prices, shipping charges and delivery dates. The cheapest offer looks good until you call the supplier and learn that it will arrive too late.
+
+Shortlist keeps the quote and your correction together. The recommendation changes when your budget or deadline changes. A later AI review can update the supplier's other facts while preserving the date you verified.
+
+Shortlist is built for small operations teams comparing one-off purchases in emails or a spreadsheet. It helps a buyer explain a decision: which offer met the requirements, where each number came from, and what a person corrected.
 
 ## A decision you can try
 
-The [recorded application demo](https://shortlist-buying.vercel.app/demo/) shows the actual private app using fictional quotes and one genuine framework agent review. It includes a source refresh, saved extraction with a verified PostgreSQL receipt, a preserved buyer lock, reload, changed budget, undo and export. The video has synthetic narration and English captions. Publication in Builder.io Clips remains pending.
+The [public Clips recording](https://clips.agent-native.com/share/Vh5lcfDQTQX1) shows the actual authenticated app using fictional supplier quotes and one genuine framework agent review. The agent reads a refreshed quote and saves source-backed facts to PostgreSQL. The buyer's locked delivery date survives the review and reload. The recording also shows a budget change, undo and export.
 
-The public [product tour](https://shortlist-buying.vercel.app) uses five preset fictional states recorded by the same domain engine as the private workspace. It includes source inspection, a locked correction, a source refresh, changed constraints, undo of a tour step and an example evidence export. It does not invoke a model or persist a user workspace. `npm run build:tour -- --check` verifies those committed snapshots against the engine; `npm run test:tour` checks the browser flow.
+The Clips link was checked while signed out. Its 54.5-second video plays with audible synthetic narration and matches the reviewed application recording. A [second player with English captions and a video download](https://shortlist-buying.vercel.app/demo/) shares the same footage.
+
+To try your own comparison, [open the working app](https://shortlist.139.84.249.47.sslip.io/home), create an account and choose the example or paste a supplier quote. Each account has its own decisions. The public app passed sign-up with secure sessions, source-backed comparisons, saved corrections through reload, budget changes, undo, export and mobile browser checks.
+
+The public [product tour](https://shortlist-buying.vercel.app) uses five preset fictional states recorded by the same domain engine as the authenticated app. It includes source inspection, a locked correction, a source refresh, changed constraints, undo of a tour step and an example evidence export. It does not invoke a model or persist a user workspace. `npm run build:tour -- --check` verifies those committed snapshots against the engine; `npm run test:tour` checks the browser flow.
 
 The disclosed example contains three fictional quotes for 100 workshop kits:
 
@@ -33,13 +45,25 @@ Select a source-linked fact to highlight its exact quote excerpt. Undo the most 
 - Requirements change. The recommendation, rejection reasons and decision trail update together.
 - An uncertain answer is actionable. Unknown tax, quantity, currency, delivery or unreviewed exclusions prevents an offer being selected.
 
-## Agent-Native integration
+## Why Agent-Native matters here
 
-Created from the official default scaffold with core/toolkit **0.223.0**, inspected against source revision **f34b2ff2da31192a5a6ce372f33e65a6a9e1dc11**.
+The [Builder.io hackathon](https://www.builder.io/hackathon/rules) puts 40% of the score on usefulness and execution, and 20% each on creativity and design, the people-and-agent workflow, and use of Agent-Native. Shortlist brings those parts together in one buying decision: readable comparisons, source inspection, saved agent work and corrections the buyer controls.
 
-Domain operations are registered with defineAction and use the framework's validation, authorization and transport. The interface calls useActionQuery/useActionMutation; the framework agent orchestrates those same actions. Navigation exposes the selected decision and supplier. AI controls hand off to the existing agent sidebar. No duplicate JSON CRUD API or separate AI-only state store is used.
+[Agent-Native](https://github.com/BuilderIO/agent-native) gives the person and agent shared actions, shared data and the context of the current screen. That is useful for a buying decision: the agent needs to work with the quotes and corrections the buyer is looking at, and its saved work needs to appear in that same comparison.
 
-Writes lock the aggregate row, reject stale versions, update state and insert an event in one transaction. Replacing quote text invalidates old extraction. Undo restores content at a new version. Human correction/lock controls are unavailable to agent tools.
+| What the buyer does | What the agent does | Shared implementation |
+| --- | --- | --- |
+| Opens a decision and selects a supplier | Reads that decision, selected supplier and source text | [Screen context](actions/view-screen.ts), [quote reads](actions/get-quote.ts) |
+| Checks a price against its original quote | Saves extracted facts with exact supporting excerpts | [Extraction action](actions/apply-extraction.ts) |
+| Changes the budget or deadline | Reads the updated requirements and resulting ranking | [Requirements action](actions/update-requirements.ts), [decision action](actions/get-decision.ts) |
+| Corrects and locks a delivery date | Preserves that human correction during extraction | [Human correction](actions/correct-quote.ts), [extraction action](actions/apply-extraction.ts) |
+| Replaces a quote, undoes a change or exports the decision | Uses the committed decision state | [Source replacement](actions/replace-quote-source.ts), [undo](actions/undo-decision.ts), [export](actions/export-decision.ts) |
+
+The interface uses `useActionQuery` and `useActionMutation`; the framework agent uses the registered actions as tools. Both paths validate the request and check the authenticated owner. Human correction and lock controls are reserved for the person.
+
+Writes reject stale versions, save the change and its history in one PostgreSQL transaction, and verify the committed result. Replacing quote text invalidates facts extracted from the old source. Undo restores the earlier content at a new version. The recorded agent review returned a verified receipt for the saved change.
+
+Shortlist was created from the official default scaffold with core/toolkit **0.223.0**, inspected against source revision **f34b2ff2da31192a5a6ce372f33e65a6a9e1dc11**. The quote comparison, evidence checks, protected corrections and decision history were built for this project during the hackathon window.
 
 ## Run and verify
 
@@ -58,9 +82,9 @@ The sponsored agent is disabled by default. When an operator enables it, the ser
 
 The production deployment needs DATABASE_URL for persistent PostgreSQL and BETTER_AUTH_SECRET for stable sessions. Apply migrations before promotion. The framework's documented Vercel build uses NITRO_PRESET=vercel; Node/Docker hosting is also supported.
 
-The separate public tour and recorded demonstration deploy only the contents of `preview/`, with its nested Vercel configuration. The authenticated Agent-Native application runs privately on persistent PostgreSQL with a connected NEAR AI model. Its buying workflow and real agent review have passed browser verification. A public Builder.io Clips recording is still required for the contest entry.
+The separate public tour and recorded demonstration deploy only the contents of `preview/`, with its nested Vercel configuration. The [authenticated application](https://shortlist.139.84.249.47.sslip.io/home) runs on Node with persistent PostgreSQL and a connected NEAR AI model. For this demonstration, an HTTPS gateway on Vultr reaches the existing application VPS through an encrypted SSH tunnel. The database remains available only on the private local listener. Each decision and its history belong to the signed-in owner.
 
-Build and integration verification status is recorded by GitHub Actions. A public Builder.io Clips recording is an additional contest requirement; a repository or deployment alone does not complete the entry.
+Eight domain tests, seven isolated PostgreSQL action/storage tests, typecheck, framework doctor, production build, private-app browser checks and public-tour browser checks passed. [GitHub Actions](.github/workflows/verify.yml) defines the repeatable verification workflow. The required public Clips video is verified; the entrant still needs to complete the official submission.
 
 ## Practical scope
 
@@ -68,4 +92,4 @@ The first workflow accepts pasted text or CSV. Currency conversion, PDF extracti
 
 MIT. The application scaffold comes from Builder.io's MIT-licensed Agent-Native project; application behavior was developed for Shortlist during the hackathon window.
 
-See [submission and demo preparation](SUBMISSION.md) for the required public Builder.io Clips recording and remaining live checks.
+See [entry preparation](SUBMISSION.md) for the verified Clips link, required deliverables and official rules.
