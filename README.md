@@ -4,7 +4,7 @@
 
 Shortlist helps you choose a supplier by comparing their quotes against your budget, order size and delivery deadline. It shows the complete price, explains why an offer fits or fails, and lets you check the original quote. If you correct a fact, such as a delivery date, you can lock it so the AI keeps your correction when it updates the comparison.
 
-[Open Shortlist](https://shortlist.139.84.249.47.sslip.io/home) · [Watch the public Builder.io Clips demo](https://clips.agent-native.com/share/Vh5lcfDQTQX1) · [Explore the guided tour](https://shortlist-buying.vercel.app) · [Download the narrated video](https://shortlist-buying.vercel.app/demo/shortlist-demo.mp4)
+[Open Shortlist](https://shortlist-buying.vercel.app/home) · [Watch the public Builder.io Clips demo](https://clips.agent-native.com/share/Vh5lcfDQTQX1) · [Explore the guided tour](https://shortlist-buying.vercel.app/tour/) · [Download the narrated video](https://shortlist-buying.vercel.app/demo/shortlist-demo.mp4)
 
 ![Shortlist's supplier comparison in the recorded application](preview/demo/poster.jpg)
 
@@ -22,9 +22,9 @@ The [public Clips recording](https://clips.agent-native.com/share/Vh5lcfDQTQX1) 
 
 The Clips link was checked while signed out. Its 54.5-second video plays with audible synthetic narration and matches the reviewed application recording. A [second player with English captions and a video download](https://shortlist-buying.vercel.app/demo/) shares the same footage.
 
-To try your own comparison, [open the working app](https://shortlist.139.84.249.47.sslip.io/home), create an account and choose the example or paste a supplier quote. Each account has its own decisions. The public app passed sign-up with secure sessions, source-backed comparisons, saved corrections through reload, budget changes, undo, export and mobile browser checks.
+To try your own comparison, [open the working app](https://shortlist-buying.vercel.app/home), create an account and choose the example or paste a supplier quote. Each account has its own decisions. The public app passed sign-up with secure sessions, source-backed comparisons, saved corrections through reload, budget changes, undo, export and mobile browser checks.
 
-The public [product tour](https://shortlist-buying.vercel.app) uses five preset fictional states recorded by the same domain engine as the authenticated app. It includes source inspection, a locked correction, a source refresh, changed constraints, undo of a tour step and an example evidence export. It does not invoke a model or persist a user workspace. `npm run build:tour -- --check` verifies those committed snapshots against the engine; `npm run test:tour` checks the browser flow.
+The public [product tour](https://shortlist-buying.vercel.app/tour/) uses five preset fictional states recorded by the same domain engine as the authenticated app. It includes source inspection, a locked correction, a source refresh, changed constraints, undo of a tour step and an example evidence export. It does not invoke a model or persist a user workspace. `npm run build:tour -- --check` verifies those committed snapshots against the engine; `npm run test:tour` checks the browser flow.
 
 The disclosed example contains three fictional quotes for 100 workshop kits:
 
@@ -82,7 +82,9 @@ The sponsored agent is disabled by default for a new installation. It is enabled
 
 The production deployment needs DATABASE_URL for persistent PostgreSQL and BETTER_AUTH_SECRET for stable sessions. Apply migrations before promotion. The framework's documented Vercel build uses NITRO_PRESET=vercel; Node/Docker hosting is also supported.
 
-The separate public tour and recorded demonstration deploy only the contents of `preview/`, with its nested Vercel configuration. The [authenticated application](https://shortlist.139.84.249.47.sslip.io/home) runs on Node with persistent PostgreSQL and a connected NEAR AI model. For this demonstration, an HTTPS gateway on Vultr reaches the existing application VPS through an encrypted SSH tunnel. The database remains available only on the private local listener. Each decision and its history belong to the signed-in owner.
+The [public Vercel URL](https://shortlist-buying.vercel.app/home) opens the full authenticated application. Vercel serves the recorded demonstration, source download and guided tour under `/demo/`, `/source.zip` and `/tour/`; other paths reach the Node application through an HTTPS gateway on Vultr and an encrypted SSH tunnel. The application uses persistent PostgreSQL and a connected NEAR AI model. The database remains available only on the private local listener. Each decision and its history belong to the signed-in owner.
+
+`scripts/build-web-gateway.py` assembles that deployment from a clean source commit. Pass `--origin` for the public HTTPS origin, `--upstream` for the HTTPS backend, `--tour`, and a fresh `--output` directory. Deploy that output directory to Vercel. Configure the backend to strip `/__web/` before proxying, and set `APP_URL` and `BETTER_AUTH_URL` to the public origin. The separate `preview/` configuration remains for tour-only deployments.
 
 Eight domain tests, seven isolated PostgreSQL action/storage tests, typecheck, framework doctor, production build, private-app browser checks and public-tour browser checks passed. [GitHub Actions](.github/workflows/verify.yml) defines the repeatable verification workflow. The required public Clips video is verified; the entrant still needs to complete the official submission.
 
