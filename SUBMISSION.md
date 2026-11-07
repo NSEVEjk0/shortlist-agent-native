@@ -4,7 +4,7 @@
 
 Supplier quotes hide differences in cost and delivery, while buyers’ corrections can disappear in a fresh AI answer. Shortlist compares complete costs and deadlines with exact source excerpts, protected human corrections and an inspectable decision trail. The person and framework agent use the same registered actions and persistent decision state.
 
-The [working application](https://shortlist.139.84.249.47.sslip.io/home) is accessible over HTTPS with authenticated accounts, PostgreSQL and a connected NEAR AI model. Its real framework agent review saved facts with a verified committed receipt and preserved a buyer's locked delivery correction through reload. Public sign-up, saved corrections, reload, changed budget, undo, export, mobile layout and rejection of unauthenticated reads passed browser checks. The separate [tour](https://shortlist-buying.vercel.app) is a disclosed fictional engine recording. Domain, storage/actions, typecheck, doctor and production build checks passed locally.
+The [working application](https://shortlist-buying.vercel.app/home) is accessible over HTTPS with authenticated accounts, PostgreSQL and a connected NEAR AI model. Its real framework agent review saved facts with a verified committed receipt and preserved a buyer's locked delivery correction through reload. Public sign-up, saved corrections, reload, changed budget, undo, export, mobile layout and rejection of unauthenticated reads passed browser checks. The separate [tour](https://shortlist-buying.vercel.app/tour/) is a disclosed fictional engine recording. Domain, storage/actions, typecheck, doctor and production build checks passed locally.
 
 PDF extraction, currency conversion, purchasing and supplier messaging are outside this version. A citation proves source text exists; the buyer must still review its interpretation.
 
@@ -33,7 +33,7 @@ The film is under 60 seconds and its public Clips URL has passed signed-out brow
 
 ## Announcement draft
 
-Meet Shortlist: supplier comparisons with the source, complete costs and your corrections in one workspace. Change a deadline, lock a fact you verified, and let the buying agent work through the same actions as the interface. The public tour uses clearly labelled fictional quotes. Tour: https://shortlist-buying.vercel.app · Code: https://github.com/NSEVEjk0/shortlist-agent-native
+Meet Shortlist: supplier comparisons with the source, complete costs and your corrections in one workspace. Change a deadline, lock a fact you verified, and let the buying agent work through the same actions as the interface. The public tour uses clearly labelled fictional quotes. Tour: https://shortlist-buying.vercel.app/tour/ · Code: https://github.com/NSEVEjk0/shortlist-agent-native
 
 Rewrite the announcement in your own voice. This draft has not been posted.
 
