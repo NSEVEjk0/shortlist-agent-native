@@ -1,6 +1,7 @@
 import test from "node:test";
 import assert from "node:assert/strict";
 import { randomUUID } from "node:crypto";
+import { spawnSync } from "node:child_process";
 import { and, eq } from "drizzle-orm";
 import { closeDbExec } from "@agent-native/core/db";
 import { checkActionProperties } from "@agent-native/core/action-properties";
@@ -80,6 +81,22 @@ test("a content restore advances the version and rejects pre-restore responses",
 test("agent callers cannot authorize human corrections; the real action wrapper rejects invalid input", async () => {
   assert.throws(() => humanOnly({ caller: "tool", userEmail: owner }));
   await checkActionProperties(correctAction, { context: { caller: "tool", userEmail: owner }, runs: 15, seed: 41104 });
+});
+
+test("the configured agent admits repeated turns without user or global daily quotas", () => {
+  // Non-secret operator settings; no provider or model request is made here.
+  const module = JSON.stringify(new URL("../server/store.ts", import.meta.url).href);
+  const configured = spawnSync(process.execPath, ["--experimental-strip-types", "--input-type=module", "-e",
+    `import { requireSponsoredAi } from ${module}; for (let i = 0; i < 25; i++) requireSponsoredAi();`], {
+    env: { ...process.env, SHORTLIST_SPONSORED_AI: "true", SHORTLIST_DAILY_AI_LIMIT: "1", SHORTLIST_USER_DAILY_AI_LIMIT: "1" },
+    encoding: "utf8", timeout: 10000,
+  });
+  assert.equal(configured.status, 0, "Configured agent admissions were blocked by a trial quota.");
+  const disabled = spawnSync(process.execPath, ["--experimental-strip-types", "--input-type=module", "-e",
+    `import assert from "node:assert/strict"; import { requireSponsoredAi } from ${module}; assert.throws(() => requireSponsoredAi(), error => error.errorCode === "ai_not_configured");`], {
+    env: { ...process.env, SHORTLIST_SPONSORED_AI: "false" }, encoding: "utf8", timeout: 10000,
+  });
+  assert.equal(disabled.status, 0, "An unconfigured sponsored provider was admitted.");
 });
 
 test.after(async () => {

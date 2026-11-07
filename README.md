@@ -76,7 +76,7 @@ Node 22.22 or newer is required.
 
 For an isolated PostgreSQL test database, run npm run migrate:production, npm test, npm run typecheck, npm run agent-native:doctor, npm run build and npm run test:browser. The verification workflow performs these checks and retains screenshots/traces on failure. npm run test:domain needs no database or provider key.
 
-The sponsored agent is disabled by default. When an operator enables it, the server requires per-user and global daily turn allowances. Code execution and broad framework tools are disabled for this buying workflow.
+The sponsored agent is disabled by default for a new installation. It is enabled in the hosted app and has no per-user or global daily turn quota. Code execution and broad framework tools are disabled for this buying workflow.
 
 ## Deployment
 
