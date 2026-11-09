@@ -2,6 +2,7 @@ import { z } from "zod";
 export const idSchema = z.string().min(1).max(100).describe("Private decision workspace ID");
 export const quoteIdSchema = z.string().min(1).max(100).describe("Supplier quote ID inside this workspace");
 export const versionSchema = z.number().int().positive().describe("Current workspace version from get-decision; stale versions are rejected");
+export const permissionVersionSchema = z.number().int().positive().optional().describe("For agent changes, current permissions.version from get-decision; stale or missing permission versions are rejected");
 export const evidenceSchema = z.object({
   start: z.number().int().min(0).describe("Zero-based UTF-16 start character offset in the original source"),
   end: z.number().int().positive().describe("Exclusive UTF-16 end character offset in the original source"),
@@ -18,9 +19,17 @@ export const requirementsSchema = z.object({
   currency: z.enum(["USD", "EUR", "GBP"]).describe("Required currency, without conversion"),
   deliveryBy: z.string().regex(/^\d{4}-\d{2}-\d{2}$/).describe("Last acceptable delivery date, YYYY-MM-DD"),
 });
-export const stateSchema = z.object({ title: z.string(), requirements: requirementsSchema, quotes: z.array(quoteSchema) });
+export const permissionsSchema = z.object({ version: z.number().int().positive(), allowed: z.object({ extractFacts: z.boolean(), addQuotes: z.boolean(), draftPlans: z.boolean(), changeRequirements: z.boolean() }) });
+export const verificationSchema = z.object({ checker: z.string(), passed: z.boolean(), totalMinor: z.number().nullable(), checks: z.array(z.object({ id: z.string(), label: z.string(), ok: z.boolean() })) });
+export const planSchema = z.object({
+  id: z.string(), fingerprint: z.string().length(64), inputHash: z.string().length(64), preparedVersion: z.number().int().positive(), preparedAt: z.string(), quoteId: z.string(), supplier: z.string(),
+  quantity: z.number().int().positive(), currency: z.enum(["USD", "EUR", "GBP"]), unitMinor: z.number().int().min(0), shippingMinor: z.number().int().min(0), taxMinor: z.number().int().min(0), totalMinor: z.number().int().min(0), deliveryDate: z.string(),
+  verification: verificationSchema, status: z.enum(["ready", "approved", "outdated"]), approval: z.object({ fingerprint: z.string().length(64), reviewedVersion: z.number().int().positive(), approvedAt: z.string() }).nullable(),
+});
+export const stateSchema = z.object({ title: z.string(), requirements: requirementsSchema, quotes: z.array(quoteSchema), agentPermissions: permissionsSchema.optional(), purchasePlan: planSchema.optional() });
+export const optionSchema = z.object({ quoteId: z.string(), supplier: z.string(), totalMinor: z.number().nullable(), eligible: z.boolean(), extraBudgetMinor: z.number().nullable(), lateDays: z.number().nullable(), maximumUnitMinor: z.number().nullable(), missing: z.array(z.string()), changes: z.array(z.string()), questions: z.string() });
 export const assessmentSchema = z.object({ id: z.string(), supplier: z.string(), totalMinor: z.number().nullable(), deliveryDate: z.string().nullable(), eligible: z.boolean(), reasons: z.array(z.string()), warnings: z.array(z.string()) });
 export const eventSchema = z.object({ id: z.string(), version: z.number(), kind: z.string(), actor: z.enum(["human", "agent"]), summary: z.string(), previousWinner: z.string().nullable(), nextWinner: z.string().nullable(), createdAt: z.string() });
-export const viewSchema = z.object({ id: z.string(), version: z.number(), state: stateSchema, updatedAt: z.string(), recommendation: z.object({ winner: assessmentSchema.nullable(), assessments: z.array(assessmentSchema) }), events: z.array(eventSchema) });
+export const viewSchema = z.object({ id: z.string(), version: z.number(), state: stateSchema, updatedAt: z.string(), recommendation: z.object({ winner: assessmentSchema.nullable(), assessments: z.array(assessmentSchema) }), events: z.array(eventSchema), permissions: permissionsSchema, options: z.array(optionSchema) });
 export const receiptSchema = z.object({ changed: z.boolean(), verified: z.boolean(), subject: z.string(), summary: z.string(), checks: z.array(z.object({ id: z.string(), ok: z.boolean() })) });
 export const mutationSchema = viewSchema.extend({ _receipt: receiptSchema });

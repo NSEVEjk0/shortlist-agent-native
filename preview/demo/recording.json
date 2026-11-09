@@ -1,83 +1,149 @@
 {
   "completed": true,
   "fictional_supplier_quotes": true,
-  "actual_framework_agent_review": true,
-  "live_write_receipts": [
-    {
-      "tool": "apply-extraction",
-      "receipt": {
-        "changed": true,
-        "verified": true,
-        "summary": "Applied source-linked facts; preserved manual locks",
-        "subject": "99e43faf-3be8-471b-a1d4-9d748a43fe5d",
-        "checks": [
-          {
-            "id": "committed-state",
-            "ok": true
-          }
-        ]
-      }
-    }
+  "actual_vultr_calls": true,
+  "source": "Actual upgraded Agent-Native application",
+  "narration": "Vultr Qwen3 TTS, Ryan voice",
+  "spoken_decision": "Actual Vultr speech returned by the application",
+  "waiting_time_shortened": true,
+  "source_sha256": "87873f401ce318b79aa68675740758131b964e7f42896765be3722f96a7cd860",
+  "mp4_sha256": "38d0b1b1e990866a00f38a05c3a86ecaa8fa07c1ae77958aed38bbfe05897757",
+  "duration_seconds": 185.36,
+  "captions": "Burned into MP4 and provided as WebVTT",
+  "workflow_checks": [
+    "reviewed voice requirements",
+    "exact evidence",
+    "locked correction preserved by real agent",
+    "precise workable options",
+    "independent plan",
+    "human exact approval",
+    "purchase packet",
+    "playable saved decision",
+    "changed terms invalidate approval",
+    "undo cannot revive approval",
+    "revoked writes preserve reads"
   ],
-  "narration": "Synthetic voice added with Microsoft Edge TTS",
-  "source_sha256": "bf5254713530f0d590b72e444c4b63382b5e33321f575cdbaba7b901ab98fd2f",
-  "mp4_sha256": "9ea6536c729fcc87163d32b94821f89b7be432167b9ead442b0e2d4d19462128",
-  "duration_seconds": 54.513985,
   "scenes": [
     {
       "index": 0,
+      "stage": "open-workspace",
       "source_start_seconds": 0,
-      "source_end_seconds": 4.075,
+      "source_end_seconds": 7.15044225,
+      "text": "Shortlist turns a buying brief and supplier quotes into a checked purchase plan. This is the actual app, using fictional quotes, real Vultr requests, and shortened model waiting time.",
+      "providerRequest": true,
       "film_start_seconds": 0,
-      "film_seconds": 7.8500000000000005,
-      "narration_seconds": 7.2,
-      "text": "Shortlist helps you compare supplier quotes and choose one that meets your budget and deadline. These three quotes are fictional."
+      "film_seconds": 15.32,
+      "narration_seconds": 14.72
     },
     {
       "index": 1,
-      "source_start_seconds": 4.075,
-      "source_end_seconds": 5.432,
-      "film_start_seconds": 7.8500000000000005,
-      "film_seconds": 3.602,
-      "narration_seconds": 2.952,
-      "text": "Click a price to see the exact words it came from."
+      "stage": "voice-brief",
+      "source_start_seconds": 7.15044225,
+      "source_end_seconds": 31.095764342,
+      "text": "A spoken brief asks for one hundred workshop kits, a complete budget of five hundred ninety US dollars, delivered by November fourteenth. Vultr transcribes it and proposes requirements. The buyer reviews and saves them.",
+      "providerRequest": true,
+      "film_start_seconds": 15.32,
+      "film_seconds": 20.04,
+      "narration_seconds": 15.04
     },
     {
       "index": 2,
-      "source_start_seconds": 5.432,
-      "source_end_seconds": 7.268,
-      "film_start_seconds": 11.452,
-      "film_seconds": 6.65,
-      "narration_seconds": 6.0,
-      "text": "Cedar confirms a delay. I correct the date and lock it, so Harbor becomes the suitable choice."
+      "stage": "trace-price",
+      "source_start_seconds": 31.095764342,
+      "source_end_seconds": 41.623192051,
+      "text": "Each extracted price links to the exact words in the quote. Cedar confirms a delivery delay. The buyer corrects the date and locks it. No current offer now meets both the budget and deadline.",
+      "providerRequest": true,
+      "film_start_seconds": 35.36,
+      "film_seconds": 12.76,
+      "narration_seconds": 12.16
     },
     {
       "index": 3,
-      "source_start_seconds": 7.268,
-      "source_end_seconds": 26.561,
-      "film_start_seconds": 18.102,
-      "film_seconds": 19.293,
-      "narration_seconds": 12.456,
-      "text": "Now Cedar sends a new quote. A real agent reads it and saves the new price and shipping. My locked date stays. The updated facts appear in the comparison, and Shortlist verifies the saved change."
+      "stage": "real-agent-refresh",
+      "source_start_seconds": 41.623192051,
+      "source_end_seconds": 65.408340377,
+      "text": "Cedar sends an updated price and shipping charge. The Vultr buying agent reads the original and saves supported facts through Agent Native actions. The locked November eighteenth delivery date stays unchanged, including after a reload.",
+      "providerRequest": true,
+      "film_start_seconds": 48.12,
+      "film_seconds": 18.52,
+      "narration_seconds": 13.52
     },
     {
       "index": 4,
-      "source_start_seconds": 26.561,
-      "source_end_seconds": 29.179,
-      "film_start_seconds": 37.394999999999996,
-      "film_seconds": 7.058000000000001,
-      "narration_seconds": 6.408,
-      "text": "Reloading keeps the correction. Lowering the budget to five hundred ninety dollars leaves no suitable offer."
+      "stage": "workable-options",
+      "source_start_seconds": 65.408340377,
+      "source_end_seconds": 72.71290707,
+      "text": "Shortlist finds a useful next move. Harbor is five dollars over budget. With shipping and tax unchanged, its unit price must be five dollars ten cents or less. The supplier question draft asks for that revised, complete quote.",
+      "providerRequest": true,
+      "film_start_seconds": 66.64,
+      "film_seconds": 15.48,
+      "narration_seconds": 14.88
     },
     {
       "index": 5,
-      "source_start_seconds": 29.179,
-      "source_end_seconds": 33.04,
-      "film_start_seconds": 44.452999999999996,
-      "film_seconds": 10.034,
-      "narration_seconds": 9.384,
-      "text": "Undo restores the earlier budget. Export downloads the decision and its original quote evidence. This recording shows the actual working application."
+      "stage": "review-budget",
+      "source_start_seconds": 72.71290707,
+      "source_end_seconds": 85.146119517,
+      "text": "The buyer reviews a budget of five hundred ninety five dollars. Harbor now fits. A separate checker recalculates the complete cost and checks quantity, currency, delivery, evidence and supplier exclusions. The exact plan is ready for human review.",
+      "providerRequest": true,
+      "film_start_seconds": 82.12,
+      "film_seconds": 17.64,
+      "narration_seconds": 17.04
+    },
+    {
+      "index": 6,
+      "stage": "approve-plan",
+      "source_start_seconds": 85.146119517,
+      "source_end_seconds": 90.62754223,
+      "text": "The buyer reviews the supplier, complete price, delivery and exclusions, then approves this exact plan. The agent cannot give that approval. Shortlist can now speak the saved decision.",
+      "providerRequest": true,
+      "film_start_seconds": 99.76,
+      "film_seconds": 13.56,
+      "narration_seconds": 12.96
+    },
+    {
+      "index": 7,
+      "stage": "spoken-decision",
+      "source_start_seconds": 90.62754223,
+      "source_end_seconds": 100.871346669,
+      "text": "Your buying brief is 100 units, a complete budget of $595.00, and delivery by 2026-11-14. Harbor Studio is the current recommendation at $595.00 in total, arriving 2026-11-12. Review these supplier exclusions: Design services are not included. Your reviewed plan for Harbor Studio is approved. You can download its purchase packet.",
+      "providerRequest": false,
+      "film_start_seconds": 113.32000000000001,
+      "film_seconds": 29.16,
+      "narration_seconds": 28.56
+    },
+    {
+      "index": 8,
+      "stage": "download-packet",
+      "source_start_seconds": 100.871346669,
+      "source_end_seconds": 105.09746833,
+      "text": "The approved purchase packet downloads with the original quotes, source evidence, corrections and independent checks. It carries the exact plan fingerprint, so the reviewed decision can be inspected later.",
+      "providerRequest": true,
+      "film_start_seconds": 142.48000000000002,
+      "film_seconds": 14.44,
+      "narration_seconds": 13.84
+    },
+    {
+      "index": 9,
+      "stage": "changed-terms",
+      "source_start_seconds": 105.09746833,
+      "source_end_seconds": 121.205001374,
+      "text": "Now the supplier increases shipping. The old approval is cleared and a fresh review is required. Undo restores the quote but cannot restore that approval. The buyer can also revoke agent writes while reading and comparisons remain available.",
+      "providerRequest": true,
+      "film_start_seconds": 156.92000000000002,
+      "film_seconds": 16.84,
+      "narration_seconds": 16.24
+    },
+    {
+      "index": 10,
+      "stage": "final-workspace",
+      "source_start_seconds": 121.205001374,
+      "source_end_seconds": 126.64,
+      "text": "Shortlist brings the buying brief, evidence, workable options and reviewed purchase plan together. The agent helps with the work, and the buyer controls the saved decision.",
+      "providerRequest": true,
+      "film_start_seconds": 173.76000000000002,
+      "film_seconds": 11.56,
+      "narration_seconds": 10.96
     }
-  ],
-  "public_clips_link": null
+  ]
 }

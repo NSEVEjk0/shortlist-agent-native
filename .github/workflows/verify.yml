@@ -19,8 +19,7 @@ jobs:
         options: --health-cmd "pg_isready -U shortlist -d shortlist_ci" --health-interval 5s --health-timeout 5s --health-retries 10
     env:
       DATABASE_URL: postgres://shortlist:shortlist-ci-only@127.0.0.1:55432/shortlist_ci
-      BETTER_AUTH_URL: http://127.0.0.1:4173
-      AGENT_ENGINE: openai
+      AGENT_ENGINE: ai-sdk:openai
       SHORTLIST_SPONSORED_AI: "false"
       AGENT_MAX_ITERATIONS: "8"
       AGENT_MAX_RUN_INPUT_TOKENS: "50000"

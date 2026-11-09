@@ -46,3 +46,6 @@ test-results/
 .env
 .env.local
 preview/source.zip
+.local/
+.deploy-tmp/
+build/

@@ -2,11 +2,13 @@ import { useEffect, useRef, useState, type FormEvent, type ReactNode } from "rea
 import { Link, useSearchParams } from "react-router";
 import { AgentSidebar } from "@agent-native/toolkit/app/chat";
 import { callAction, useActionMutation, useActionQuery } from "@agent-native/core/client/hooks";
-import { sendToAgentChat } from "@agent-native/core/client/agent-chat";
+import { sendToAgentChatAndConfirm } from "@agent-native/core/client/agent-chat";
 import { toast } from "sonner";
 import { FIELD_KEYS, type DecisionView, type Evidence, type FieldKey, type FieldValue, type Quote } from "../../shared/types";
 import { dateLabel, FIELD_LABELS, money, moneyInput } from "../../shared/format";
 import { TAB_ID } from "../lib/tab-id";
+import { BuyingControls } from "./BuyingControls";
+import { VoiceBrief } from "./VoiceBrief";
 
 function Modal({ title, children, close }: { title: string; children: ReactNode; close: () => void }) {
   const ref = useRef<HTMLDialogElement>(null);
@@ -26,8 +28,11 @@ export function ShortlistWorkspace() {
   const [dialog, setDialog] = useState<"create" | "quote" | "source" | "ai" | null>(null);
   const [edit, setEdit] = useState<{ quote: Quote; field: FieldKey } | null>(null);
   const [evidence, setEvidence] = useState<Evidence | null>(null);
-  const [busy, setBusy] = useState(false);
+  const [saving, setBusy] = useState(false);
+  const [buyingBusy, setBuyingBusy] = useState(false);
+  const busy = saving || buyingBusy;
   const [aiMessage, setAiMessage] = useState("");
+  const [sendingToAgent, setSendingToAgent] = useState(false);
   const create = useActionMutation("create-decision");
   const update = useActionMutation("update-requirements");
   const correct = useActionMutation("correct-quote");
@@ -42,8 +47,8 @@ export function ShortlistWorkspace() {
 
   async function perform(action: () => Promise<unknown>, success: string, close = true) {
     setBusy(true);
-    try { await action(); toast.success(success); if (close) { setDialog(null); setEdit(null); } }
-    catch (error) { toast.error(errorText(error)); }
+    try { await action(); if (id) await query.refetch(); toast.success(success); if (close) { setDialog(null); setEdit(null); } }
+    catch (error) { toast.error(errorText(error)); if (id) await query.refetch().catch(() => {}); }
     finally { setBusy(false); }
   }
   async function createWorkspace(example: boolean, title = "Workshop welcome kits") {
@@ -59,6 +64,21 @@ export function ShortlistWorkspace() {
   }
   function ask(message: string) {
     setAiMessage(message); setDialog("ai");
+  }
+  async function continueWithAgent() {
+    if (sendingToAgent) return;
+    setSendingToAgent(true);
+    setDialog(null);
+    try {
+      const result = await sendToAgentChatAndConfirm({ message: aiMessage, context: "Current Shortlist decision ID: " + id + "; selected quote ID: " + (selected?.id ?? "none") + ". Preserve all manual locks. Read the current permission version before making a change.", chatTarget: "local", openSidebar: true, tabId: TAB_ID });
+      if (!result.delivered) {
+        toast.error("The buying agent did not receive this request. Open the agent and try again.");
+        setDialog("ai");
+      }
+    } catch {
+      toast.error("The buying agent could not be opened. Please try again.");
+      setDialog("ai");
+    } finally { setSendingToAgent(false); }
   }
   async function exportBrief() {
     await perform(async () => {
@@ -92,7 +112,7 @@ export function ShortlistWorkspace() {
             <p className="sl-fine">The example uses three fictional supplier quotes. Changes are saved to your private workspace.</p>
             <div className="sl-benefits"><div><strong>See every source</strong><p>Trace a price or date to its exact quote.</p></div><div><strong>Make a correction stick</strong><p>Lock a fact the agent must preserve.</p></div><div><strong>Rethink without restarting</strong><p>Change the budget. See the decision update.</p></div></div>
           </div> : <>
-            <div className="sl-title-row"><div><p className="sl-eyebrow">BUYING WORKSPACE</p><h1>{view.state.title}</h1></div><div className="sl-actions"><button className="sl-button" disabled={busy} onClick={() => void exportBrief()}>↓ Export brief</button><button className="sl-button primary" onClick={() => ask("Compare my current supplier quotes against my requirements. Explain the recommendation, exclusions and any unknown facts. Preserve all manual locks.")}>✦ Ask the agent</button></div></div>
+            <div className="sl-title-row"><div><p className="sl-eyebrow">BUYING WORKSPACE</p><h1>{view.state.title}</h1></div><div className="sl-actions"><VoiceBrief view={view} blocked={busy} refresh={() => query.refetch()} /><button className="sl-button" disabled={busy} onClick={() => void exportBrief()}>↓ Export brief</button><button className="sl-button primary" onClick={() => ask("Compare my current supplier quotes against my requirements. Explain the recommendation, exclusions and any unknown facts. Preserve all manual locks.")}>✦ Ask the agent</button></div></div>
             {req && <form key={view.version} className="sl-requirements" onSubmit={(event: FormEvent<HTMLFormElement>) => {
               event.preventDefault(); const data = new FormData(event.currentTarget);
               void perform(async () => update.mutateAsync({ id, expectedVersion: view.version, patch: { budgetMinor: moneyInput(String(data.get("budget"))), quantity: Number(data.get("quantity")), currency: String(data.get("currency")) as "USD" | "EUR" | "GBP", deliveryBy: String(data.get("deadline")) } }), "Requirements saved; recommendation recalculated", false);
@@ -105,7 +125,7 @@ export function ShortlistWorkspace() {
               <section className="sl-comparison"><div className="sl-section-top"><h2>Supplier comparison</h2><button className="sl-text-button" onClick={() => setDialog("quote")}>＋ Add quote</button></div>
                 {!view.state.quotes.length ? <div className="sl-panel-empty"><p>Start with an original supplier quote.</p><button className="sl-button" onClick={() => setDialog("quote")}>Paste a quote</button></div> : <div className="sl-table-wrap"><table><thead><tr><th>Supplier</th><th>Total cost</th><th>Delivery</th><th>Fit</th></tr></thead><tbody>{view.state.quotes.map(quote => {
                   const assessment = view.recommendation.assessments.find(item => item.id === quote.id);
-                  return <tr key={quote.id} className={selected?.id === quote.id ? "selected" : ""}><td><button className="sl-supplier" onClick={() => selectQuote(quote)} aria-label={"View " + quote.supplier}><span className="sl-avatar">{quote.supplier.charAt(0)}</span><span>{quote.supplier}{winner?.id === quote.id && <small>Recommended</small>}</span></button></td><td>{money(assessment?.totalMinor ?? null, req?.currency)}</td><td>{dateLabel(assessment?.deliveryDate ?? null)}{quote.fields.deliveryDate.locked && <span title="Your locked correction" aria-label="Delivery date locked"> ▣</span>}</td><td>{assessment?.eligible ? <span className="sl-fit">Meets requirements</span> : <span className="sl-unfit">{assessment?.reasons[0]}</span>}</td></tr>;
+                  return <tr key={quote.id} className={selected?.id === quote.id ? "selected" : ""}><td><button className="sl-supplier" onClick={() => selectQuote(quote)} aria-label={"View " + quote.supplier}><span className="sl-avatar">{quote.supplier.charAt(0)}</span><span>{quote.supplier}{winner?.id === quote.id && <small>Recommended</small>}</span></button></td><td>{quote.fields.currency.value === null ? "Confirm currency" : money(assessment?.totalMinor ?? null, String(quote.fields.currency.value))}</td><td>{dateLabel(assessment?.deliveryDate ?? null)}{quote.fields.deliveryDate.locked && <span title="Your locked correction" aria-label="Delivery date locked"> ▣</span>}</td><td>{assessment?.eligible ? <span className="sl-fit">Meets requirements</span> : <span className="sl-unfit">{assessment?.reasons[0]}</span>}</td></tr>;
                 })}</tbody></table></div>}
                 {selected && <div className="sl-facts"><div className="sl-section-top"><h3>{selected.supplier} · confirmed facts</h3><button className="sl-text-button" onClick={() => ask("Read and extract the current original quote for supplier " + selected.id + " in decision " + id + ". Use exact source citations and preserve human-locked fields. Leave ambiguous amounts or dates unknown.")}>✦ Review with agent</button></div>
                   {FIELD_KEYS.map(field => { const fact = selected.fields[field]; const amount = ["unitMinor", "shippingMinor", "taxMinor"].includes(field);
@@ -117,6 +137,7 @@ export function ShortlistWorkspace() {
               </section>
               <section className="sl-source"><div className="sl-section-top"><h2>Original quote</h2>{selected && <button className="sl-text-button" onClick={() => setDialog("source")}>Replace source</button>}</div>{selected ? <><div className="sl-document-top"><span>↳ {selected.supplier}</span><small>Original text</small></div><pre>{evidence ? <>{selected.source.slice(0, evidence.start)}<mark>{selected.source.slice(evidence.start, evidence.end)}</mark>{selected.source.slice(evidence.end)}</> : selected.source}</pre><div className="sl-source-foot"><span>✓ Exact source preserved</span><p>Select a source-linked fact to highlight its evidence. Your corrections keep their own reason.</p></div></> : <div className="sl-panel-empty">Select a supplier to inspect its quote.</div>}</section>
             </div>
+            <BuyingControls view={view} ask={ask} blocked={busy} onBusyChange={setBuyingBusy} refresh={() => query.refetch()} />
             <details className="sl-history"><summary>Decision trail · {view.events.length} recent changes</summary>{view.events.map(event => <div key={event.id}><time>{new Date(event.createdAt).toLocaleString()}</time><span>{event.actor === "agent" ? "Agent" : "You"}</span><p>{event.summary}</p><small>v{event.version}</small></div>)}</details>
           </>}
           <footer className="sl-footer"><span>Shortlist · source-linked buying decisions</span><span>Built with Agent-Native</span></footer>
@@ -134,7 +155,7 @@ export function ShortlistWorkspace() {
           return correct.mutateAsync({ id, quoteId: edit.quote.id, expectedVersion: view.version, field: edit.field, value, note: String(data.get("note")), locked: data.get("locked") === "on" });
         }, "Saved your correction and recalculated the decision");
       }}><label>{FIELD_LABELS[edit.field]}<input name="value" type={edit.field === "deliveryDate" ? "date" : "text"} defaultValue={typeof edit.quote.fields[edit.field].value === "number" && ["unitMinor", "shippingMinor", "taxMinor"].includes(edit.field) ? (Number(edit.quote.fields[edit.field].value) / 100).toFixed(2) : String(edit.quote.fields[edit.field].value ?? "")} required autoFocus /></label><label>Reason<input name="note" placeholder="e.g. Supplier confirmed a later delivery" defaultValue={edit.quote.fields[edit.field].note ?? ""} minLength={3} maxLength={300} required /></label><label className="sl-checkbox"><input name="locked" type="checkbox" defaultChecked />Lock this correction against agent changes</label><button className="sl-button primary" disabled={busy}>{busy ? "Saving…" : "Save correction"}</button></form></Modal>}
-      {dialog === "ai" && <Modal title="Work with the buying agent" close={() => setDialog(null)}><p>The agent uses the same workspace actions as you. Your quote text and conversation are sent to the model provider configured in Settings.</p><p className="sl-fine">Use the fictional example to explore the sponsored demo. Review the provider connection before using confidential supplier information.</p><button className="sl-button primary" onClick={() => { setDialog(null); sendToAgentChat({ message: aiMessage, context: "Current Shortlist decision ID: " + id + "; selected quote ID: " + (selected?.id ?? "none") + ". Preserve all manual locks.", openSidebar: true, tabId: TAB_ID }); }}>Continue with the agent ↗</button></Modal>}
+      {dialog === "ai" && <Modal title="Work with the buying agent" close={() => setDialog(null)}><p>The agent reads the same quotes, requirements and corrections you see. It uses Vultr and saves changes through your workspace actions, within the permissions you choose.</p><p className="sl-fine">Quote text and conversation are sent to Vultr for the agent's review.</p><button className="sl-button primary" disabled={sendingToAgent} onClick={() => void continueWithAgent()}>Continue with the agent ↗</button></Modal>}
     </div>
   </AgentSidebar>;
 }

@@ -125,3 +125,54 @@
 @media(max-width:1250px){.sl-layout{grid-template-columns:185px minmax(0,1fr)}.sl-main{padding:30px 24px 0}.sl-work-columns{grid-template-columns:1fr}.sl-source pre{min-height:200px}.sl-title-row{align-items:start;flex-direction:column}.sl-title-row h1{font-size:26px}.sl-requirements{gap:15px;padding:17px}.sl-header{padding:0 24px}}
 @media(max-width:760px){.sl-layout{display:block}.sl-nav{display:none}.sl-header{height:65px;padding:0 20px}.sl-header-note{display:none}.sl-header-links{gap:16px}.sl-main{padding:26px 18px 0}.sl-title-row{gap:16px}.sl-requirements{display:grid;grid-template-columns:1fr 1fr;gap:17px}.sl-requirements label:first-child{max-width:none}.sl-requirements input[type=date],.sl-requirements input[type=number]{width:100%}.sl-requirements>button{width:100%;margin:0}.sl-recommendation{padding:19px 16px;gap:12px}.sl-rec-icon{width:31px;height:31px;font-size:17px}.sl-recommendation h2{font-size:21px}.sl-recommendation p:not(.sl-eyebrow){font-size:11px}.sl-version{position:absolute;top:13px;right:12px;font-size:8px}.sl-comparison table{min-width:525px}.sl-fact-row{grid-template-columns:76px minmax(0,1fr) 65px 28px;padding:11px 14px;font-size:10px}.sl-section-top{padding:17px 15px}.sl-facts .sl-section-top{align-items:start;flex-direction:column;gap:9px}.sl-change{align-items:start}.sl-history>div{grid-template-columns:1fr 30px}.sl-history time{grid-column:1/-1}.sl-history p{grid-column:1/-1}.sl-benefits{grid-template-columns:1fr;gap:16px;margin-top:40px}.sl-empty{padding:25px 0 45px}.sl-empty-actions{flex-wrap:wrap}.sl-footer{flex-wrap:wrap}.sl-modal{padding:22px}}
 @media(prefers-reduced-motion:reduce){.shortlist-app *{animation:none!important;transition:none!important}}
+.sl-actions{flex-wrap:wrap}
+.sl-input-combo select{flex:0 0 74px;width:74px}
+.sl-input-combo input{flex:1;min-width:0;width:0}
+.sl-buying-controls{display:grid;gap:20px;margin-top:24px}
+.sl-workable,.sl-plan{border:1px solid var(--sl-line);border-radius:10px;background:var(--sl-paper);overflow:hidden}
+.sl-buying-controls .sl-eyebrow{font-size:9px;margin-bottom:7px}
+.sl-options{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:0;border-top:1px solid var(--sl-line)}
+.sl-option{padding:20px;border-right:1px solid var(--sl-line);min-width:0}
+.sl-option:last-child{border-right:0}
+.sl-option-heading{display:flex;justify-content:space-between;align-items:center;gap:10px}
+.sl-option h3,.sl-plan h3{font-size:14px;margin:0;font-weight:600}
+.sl-option ul{padding-left:17px;font-size:12px;line-height:1.7;color:var(--sl-muted);margin:14px 0}
+.sl-price-target{font-size:11px;line-height:1.65;padding:12px;background:#f3f6ed;border-radius:6px;color:#586e4f}
+.sl-option summary,.sl-speech summary,.sl-review-checks summary,.sl-brief-review summary{font-size:11px;color:var(--sl-green,#185c3d);cursor:pointer}
+.sl-option textarea{width:100%;margin:12px 0;border:1px solid var(--sl-line);padding:10px;border-radius:6px;resize:vertical;font-family:inherit;font-size:11px;line-height:1.7;background:#fbfcf9}
+.sl-plan-body{padding:0 20px 20px;font-size:12px;line-height:1.7}
+.sl-plan-body>p{color:var(--sl-muted);max-width:740px}
+.sl-plan-status{display:flex;gap:12px;justify-content:space-between;border-top:1px solid var(--sl-line);padding:14px 0}
+.sl-plan-status small{color:var(--sl-muted);font-size:10px}
+.sl-plan-body h3{font-size:18px}
+.sl-plan-actions{display:flex;gap:10px;flex-wrap:wrap;margin:16px 0}
+.sl-prepare{display:flex;gap:12px;align-items:end;padding-top:18px;margin-top:18px;border-top:1px solid var(--sl-line)}
+.sl-prepare label{display:flex;flex-direction:column;gap:7px;font-size:11px;color:var(--sl-muted);min-width:0}
+.sl-prepare select,.sl-modal select{padding:10px;border:1px solid #dfe5df;border-radius:6px;background:#fff;color:#1b2922;font-family:inherit;font-size:12px;max-width:100%}
+.sl-permissions{font-size:11px;padding:17px 20px;border:1px solid var(--sl-line);border-radius:10px;background:#f0f3ed;color:var(--sl-muted);line-height:1.7}
+.sl-permissions summary{cursor:pointer;color:var(--sl-ink);font-weight:550}
+.sl-permissions summary span{font-size:10px;color:var(--sl-muted);font-weight:400}
+.sl-permission-options{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px;margin:18px 0}
+.sl-permission-options label{display:flex;align-items:center;gap:9px}
+.sl-permission-options input,.sl-confirm input{accent-color:#185c3d;width:16px;height:16px}
+.sl-plan-review{max-height:calc(100dvh - 40px);overflow:auto;width:min(560px,calc(100vw - 32px))}
+.sl-plan-amounts{display:grid;gap:11px;font-size:12px;margin:0 0 20px}
+.sl-plan-amounts>div{display:flex;justify-content:space-between;gap:18px}
+.sl-plan-amounts dt{color:#66736b}.sl-plan-amounts dd{margin:0;font-weight:550;text-align:right}
+.sl-plan-amounts .sl-total{border-top:1px solid #dfe5df;padding-top:12px;font-size:15px}
+.sl-review-terms{font-size:12px;line-height:1.8;color:#66736b;background:#faf9f2;padding:13px;border-radius:6px}
+.sl-review-checks ul{list-style:none;padding:0;font-size:11px;line-height:2;color:#536e57}
+.sl-modal .sl-confirm{display:flex;flex-direction:row;align-items:start;gap:9px;margin:22px 0;font-size:12px;line-height:1.7}
+.sl-confirm input{flex-shrink:0;margin-top:3px}
+.sl-outdated{font-size:11px;line-height:1.7;color:#85530b;background:#fff6e7;border:1px solid #ead7b5;border-radius:6px;padding:12px}
+.sl-speech{margin-top:20px;padding-top:15px;border-top:1px solid var(--sl-line)}
+.sl-speech audio{width:100%;max-width:440px;height:40px;display:block;margin:10px 0}
+.sl-speech details p{font-size:11px;color:var(--sl-muted);line-height:1.8}
+.sl-voice-modal{max-height:calc(100dvh - 40px);overflow:auto}
+.sl-modal .sl-transcript-label{margin:20px 0 12px}
+.sl-recording{color:#a23939;background:#fff3f0;border-color:#e8c2b9}
+.sl-brief-review{border-top:1px solid #dfe5df;padding-top:20px;margin-top:20px}
+.sl-brief-review h3{font-size:14px;margin:0}
+.sl-brief-fields{display:grid;grid-template-columns:1fr 1fr;gap:15px}
+@media(max-width:1250px){.sl-options{grid-template-columns:1fr}.sl-option{border-right:0;border-bottom:1px solid var(--sl-line)}.sl-option:last-child{border-bottom:0}.sl-option-heading{max-width:500px}}
+@media(max-width:760px){.sl-buying-controls .sl-section-top{align-items:start;flex-direction:column}.sl-prepare{flex-direction:column;align-items:stretch}.sl-permission-options{grid-template-columns:1fr}.sl-actions{gap:8px}.sl-actions>.sl-button{padding:9px 11px;font-size:11px}.sl-option{padding:17px}.sl-plan-status{flex-wrap:wrap}.sl-brief-fields{grid-template-columns:1fr 1fr}}

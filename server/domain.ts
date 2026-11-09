@@ -9,10 +9,11 @@ function reject(code: string, message: string): never { throw new DecisionError(
 export const sourceHash = (source: string) => createHash("sha256").update(source).digest("hex");
 // PostgreSQL JSONB may reorder object keys. Fingerprint the saved content while
 // preserving array order, exact strings and JSON values.
-export const stateHash = (state: DecisionState) => sourceHash(JSON.stringify(state, (_key, value) => {
+export const contentHash = (state: unknown) => sourceHash(JSON.stringify(state, (_key, value) => {
   if (value && typeof value === "object" && !Array.isArray(value)) return Object.fromEntries(Object.entries(value).sort(([a], [b]) => a < b ? -1 : a > b ? 1 : 0));
   return value;
 }));
+export const stateHash = (state: DecisionState) => contentHash(state);
 const unknown = (): QuoteField => ({ value: null, locked: false, origin: "unknown", evidence: null, note: null });
 
 export function validDate(date: unknown): date is string {

@@ -6,13 +6,14 @@ import { decisionErrors } from "../server/action-errors.ts";
 import { emptyDecision, sampleDecision } from "../server/domain.ts";
 import { getDb } from "../server/db/index.ts";
 import { decisions } from "../server/db/schema.ts";
-import { domainFailure, readDecision, requireOwner } from "../server/store.ts";
+import { domainFailure, humanOnly, readDecision } from "../server/store.ts";
 export default defineAction({
   description: "Create a private buying workspace. The example option loads three disclosed fictional supplier quotes, prepared without AI.",
+  agentTool: false, mcpTool: false,
   schema: z.object({ title: z.string().min(1).max(160).describe("Short title for this buying decision"), example: z.boolean().default(false).describe("True to load fictional workshop-kit quotes; defaults to an empty workspace") }),
   outputSchema: mutationSchema, errors: decisionErrors,
   run: async ({ title, example }, ctx) => {
-    const ownerEmail = requireOwner(ctx);
+    const ownerEmail = humanOnly(ctx);
     let state;
     try { state = example ? sampleDecision() : emptyDecision(title); }
     catch (error) { return domainFailure(error); }

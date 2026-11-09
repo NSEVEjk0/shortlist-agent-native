@@ -1,6 +1,6 @@
 import { defineAction } from "@agent-native/core/action";
 import { z } from "zod";
-import { evidenceSchema, exclusionsSchema, fieldValueSchema, idSchema, mutationSchema, quoteIdSchema, versionSchema } from "../server/action-schemas.ts";
+import { evidenceSchema, exclusionsSchema, fieldValueSchema, idSchema, mutationSchema, permissionVersionSchema, quoteIdSchema, versionSchema } from "../server/action-schemas.ts";
 import { decisionErrors } from "../server/action-errors.ts";
 import { applyExtraction, changeQuote } from "../server/domain.ts";
 import { mutateDecision } from "../server/store.ts";
@@ -8,7 +8,7 @@ const extracted = z.object({ value: fieldValueSchema.describe("Integer minor cur
 export default defineAction({
   description: "Apply explicitly quoted facts at the current source hash and workspace version. Exact citations and stated values are validated. Human-locked fields remain unchanged.",
   schema: z.object({
-    id: idSchema, quoteId: quoteIdSchema, expectedVersion: versionSchema,
+    id: idSchema, quoteId: quoteIdSchema, expectedVersion: versionSchema, permissionVersion: permissionVersionSchema,
     sourceHash: z.string().length(64).describe("Current SHA-256 sourceHash from get-quote"),
     extraction: z.object({
       fields: z.object({ quantity: extracted.optional(), unitMinor: extracted.optional(), shippingMinor: extracted.optional(), taxMinor: extracted.optional(), currency: extracted.optional(), deliveryDate: extracted.optional() }).describe("Only explicitly stated source facts; omit every locked field returned by get-quote. Never cite a manual correction. Cents for amounts and YYYY-MM-DD for dates"),
@@ -16,5 +16,5 @@ export default defineAction({
     }),
   }),
   outputSchema: mutationSchema, errors: decisionErrors,
-  run: async ({ id, quoteId, expectedVersion, sourceHash, extraction }, ctx) => mutateDecision({ id, expectedVersion, ctx, kind: "extraction", summary: "Applied source-linked facts; preserved manual locks", change: state => changeQuote(state, quoteId, quote => applyExtraction(quote, sourceHash, extraction).quote) }),
+  run: async ({ id, quoteId, expectedVersion, permissionVersion, sourceHash, extraction }, ctx) => mutateDecision({ id, expectedVersion, permissionVersion, ctx, kind: "extraction", summary: "Applied source-linked facts; preserved manual locks", change: state => changeQuote(state, quoteId, quote => applyExtraction(quote, sourceHash, extraction).quote) }),
 });

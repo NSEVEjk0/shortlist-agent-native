@@ -1,42 +1,44 @@
 # Shortlist entry preparation
 
-## Problem, solution and useful distinction
+Shortlist turns a spoken or typed buying brief and original supplier quotes into a checked purchase plan. Its workflow combines source-linked agent extraction, protected human corrections, precise workable-option drafts, independent cost checks, exact human approval and revocable agent permissions.
 
-Supplier quotes hide differences in cost and delivery, while buyers’ corrections can disappear in a fresh AI answer. Shortlist compares complete costs and deadlines with exact source excerpts, protected human corrections and an inspectable decision trail. The person and framework agent use the same registered actions and persistent decision state.
+## Event and category
 
-The [working application](https://shortlist-buying.vercel.app/home) is accessible over HTTPS with authenticated accounts, PostgreSQL and a connected NEAR AI model. Its real framework agent review saved facts with a verified committed receipt and preserved a buyer's locked delivery correction through reload. Public sign-up, saved corrections, reload, changed budget, undo, export, mobile layout and rejection of unauthenticated reads passed browser checks. The separate [tour](https://shortlist-buying.vercel.app/tour/) is a disclosed fictional engine recording. Domain, storage/actions, typecheck, doctor and production build checks passed locally.
+[Builder.io Agent-Native Hackathon](https://www.builder.io/hackathon/rules). The deadline is **November 10, 2026 at 07:59 UTC** (November 9 at 11:59 PM Pacific Time).
 
-PDF extraction, currency conversion, purchasing and supplier messaging are outside this version. A citation proves source text exists; the buyer must still review its interpretation.
+Shortlist fits the **Best Productivity App** recognition category. Best Overall App, Best Productivity App, Most Creative App and Best Use of Agent-Native are recognition categories; the rules do not define separate cash-prize technology tracks. Judging weights are usefulness and execution 40%, creativity and design 20%, people-and-agent innovation 20%, and clever use of Agent-Native 20%.
 
-## Required deliverables
+The added workable-option flow supports those criteria: the agent and buyer turn a failed comparison into specific supplier questions without silently changing requirements. Human control is visible in locked corrections, permissions and exact-plan approval.
 
-- A functional Agent-Native app and disclosure of the official 0.223.0 scaffold and event-specific development.
-- A **public Builder.io Clips recording viewable without signing in**: [verified public recording](https://clips.agent-native.com/share/Vh5lcfDQTQX1). It opens signed out, plays with sound and matches the reviewed 54.5-second application film.
-- Genuine human submission by **10 November 2026, 07:59 UTC**.
-- [Public repository](https://github.com/NSEVEjk0/shortlist-agent-native) and tour are prepared. A separate slide deck is optional and is not being created.
+## Required demonstration
 
-Sources: [official rules](https://www.builder.io/hackathon/rules), [submission form](https://www.builder.io/hackathon/submit).
+The rules require a **public Builder.io Clips recording showing the actual app**, viewable without login. A live deployment and public repository are encouraged. Recording alone does not submit the entry; use the [submission form](https://www.builder.io/hackathon/submit) and confirm receipt.
 
-## Completed Clips recording
+The [complete upgrade demonstration](https://shortlist-buying.vercel.app/demo/) and [downloadable narrated MP4](https://shortlist-buying.vercel.app/demo/shortlist-demo.mp4) show the workflow below with Vultr narration. Publish the upgraded recording through Clips and verify its public link before entering the submission form. The existing [public Clips recording](https://clips.agent-native.com/share/Vh5lcfDQTQX1) documents the earlier comparison and protected-correction workflow; it predates this upgrade.
 
-The completed recording uses the authenticated application, disclosed fictional quotes and an actual framework agent interaction. Synthetic narration was added to the real footage. [The public player](https://shortlist-buying.vercel.app/demo/) also has English captions and an MP4 download.
+1. Speak the disclosed fictional buying brief; review and save the proposed requirements.
+2. Inspect an original quote and exact price excerpt.
+3. Lock the supplier-confirmed delivery correction.
+4. Replace the source and show genuine Vultr agent extraction preserving that lock.
+5. Show the $5 shortfall and $5.10 unit-price target, then review the supplier draft.
+6. Review a workable budget, prepare the independently checked plan and approve its exact supplier, complete cost, delivery and exclusions.
+7. Hear the saved decision and download the approved packet.
+8. Change shipping and show approval clearing. Undo restores content while a fresh approval is still required; revoke agent writes while comparisons remain available.
 
-| Time | Show | Explain |
-| --- | --- | --- |
-| 0–7 s | Three disclosed sample quotes and complete costs | The cheapest-looking offer can miss a hidden cost or deadline. |
-| 7–19 s | Source excerpt and buyer’s locked delivery correction | Shortlist keeps the evidence and what the buyer knows. |
-| 19–33 s | Actual framework agent refresh; the lock survives | The agent and interface share registered actions and the same state. |
-| 33–44 s | Budget/deadline change and resulting recommendation or no-fit reason | Requirements change without losing the decision trail. |
-| 44–55 s | Undo/export and source repository | This version handles pasted text/CSV and requires human review of interpretation. |
+Verify saved changes and playable narration. Keep passwords, session cookies, credentials and private workspace material out of published assets. The example quotes and spoken brief are fictional; the agent, transcription, speech, transactions and checks are actual calls and application behavior.
 
-The film is under 60 seconds and its public Clips URL has passed signed-out browser verification. It includes real saved agent facts, source inspection, a preserved correction, reload, changed requirements, undo and export. No further model review or Clips upload is needed to use this recording.
+## Development disclosure
 
-## Announcement draft
+Shortlist uses Builder.io's MIT-licensed Agent-Native **0.223.0** default scaffold, inspected against revision **f34b2ff2da31192a5a6ce372f33e65a6a9e1dc11**. The buying domain, source validation, locked corrections, transactional history, voice integration, independent plans, exact approval and permissions were developed for this project during the event window. The supplied Vultr key is private and excluded from source and client assets.
 
-Meet Shortlist: supplier comparisons with the source, complete costs and your corrections in one workspace. Change a deadline, lock a fact you verified, and let the buying agent work through the same actions as the interface. The public tour uses clearly labelled fictional quotes. Tour: https://shortlist-buying.vercel.app/tour/ · Code: https://github.com/NSEVEjk0/shortlist-agent-native
+The separate `/tour/` uses fictional preset states from the domain engine. It supports source inspection and comparisons. The private `/home` workspace is the working Agent-Native application.
 
-Rewrite the announcement in your own voice. This draft has not been posted.
+## Points to explain in your own words
 
-## Submission outline
+- The operations team's problem: complete supplier costs, changed delivery dates and missing terms.
+- How registered actions and PostgreSQL connect the interface and agent.
+- What the human controls: correction locks, permissions and exact approval.
+- What the independent checker verifies, and the difference between exact spans and document authenticity.
+- What the recording demonstrates, which scaffold was reused, and what was built during the event.
 
-Explain the buyer problem, shared Agent-Native actions and navigation context, protected corrections, transaction/version behavior, the actual agent interaction, scaffold disclosure, limits and public Clips URL. A tour URL alone does not demonstrate the authenticated agent workflow.
+Links: [app](https://shortlist-buying.vercel.app/home), [repository](https://github.com/NSEVEjk0/shortlist-agent-native), [official rules](https://www.builder.io/hackathon/rules).

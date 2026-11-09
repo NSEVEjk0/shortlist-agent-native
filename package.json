@@ -5,6 +5,7 @@
   "scripts": {
     "dev": "agent-native dev",
     "build": "agent-native build",
+    "build:release": "node scripts/build-release.mjs",
     "start": "agent-native start",
     "typecheck": "agent-native typecheck",
     "agent-native:doctor": "agent-native doctor",
@@ -17,8 +18,10 @@
     "test:browser": "playwright test",
     "build:tour": "node --experimental-strip-types scripts/build-tour.mjs",
     "test:tour": "playwright test --config playwright-tour.config.ts",
-    "test:domain": "node --experimental-strip-types tests/domain.test.ts",
-    "test:storage": "node --experimental-strip-types tests/storage.test.ts"
+    "test:domain": "node --experimental-strip-types tests/domain.test.ts && node --experimental-strip-types tests/buying.test.ts && node --experimental-strip-types tests/voice.test.ts",
+    "test:storage": "node --experimental-strip-types tests/storage.test.ts",
+    "test:contract": "node --experimental-strip-types scripts/test-contract.mjs",
+    "test:browser-live": "node scripts/test-browser.mjs"
   },
   "dependencies": {
     "@agent-native/core": "0.223.0",

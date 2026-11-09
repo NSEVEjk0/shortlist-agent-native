@@ -5,6 +5,7 @@ import type { DecisionState, DecisionView } from "../shared/types.ts";
 import { DecisionError, recommend, stateHash } from "./domain.ts";
 import { getDb } from "./db/index.ts";
 import { decisionEvents, decisions } from "./db/schema.ts";
+import { checkAgentMutation, invalidatePurchasePlan, permissionsFor, workableOptions } from "./buying.ts";
 
 export function requireOwner(ctx?: ActionRunContext) {
   if (!ctx?.userEmail) fail("Sign in to open your private workspace.", { errorCode: "unauthenticated", statusCode: 401 });
@@ -13,8 +14,12 @@ export function requireOwner(ctx?: ActionRunContext) {
 
 export function humanOnly(ctx?: ActionRunContext) {
   const owner = requireOwner(ctx);
-  if (!ctx || !["frontend", "http"].includes(ctx.caller)) fail("This change needs a person using the workspace controls.", { errorCode: "human_only", statusCode: 403 });
+  if (!isHumanCaller(ctx)) fail("This change needs a person using the workspace controls.", { errorCode: "human_only", statusCode: 403 });
   return owner;
+}
+
+export function isHumanCaller(ctx?: ActionRunContext): boolean {
+  return Boolean(ctx && ["frontend", "http"].includes(ctx.caller) && !ctx.networkProtocol && !ctx.mcpDirectoryWidgetWrite && !ctx.mcpDirectoryWidgetReadOnly);
 }
 
 export function domainFailure(error: unknown): never {
@@ -30,7 +35,7 @@ export async function readDecision(id: string, owner: string): Promise<DecisionV
     id: decisionEvents.id, version: decisionEvents.version, kind: decisionEvents.kind, actor: decisionEvents.actor,
     summary: decisionEvents.summary, previousWinner: decisionEvents.previousWinner, nextWinner: decisionEvents.nextWinner, createdAt: decisionEvents.createdAt,
   }).from(decisionEvents).where(and(eq(decisionEvents.decisionId, id), eq(decisionEvents.ownerEmail, owner))).orderBy(desc(decisionEvents.version)).limit(20);
-  return { id: row.id, version: row.version, state: row.state, updatedAt: row.updatedAt, recommendation: recommend(row.state), events };
+  return { id: row.id, version: row.version, state: row.state, updatedAt: row.updatedAt, recommendation: recommend(row.state), events, permissions: permissionsFor(row.state), options: workableOptions(row.state) };
 }
 
 export async function mutateDecision(input: {
@@ -39,6 +44,7 @@ export async function mutateDecision(input: {
   ctx?: ActionRunContext | undefined;
   kind: string;
   summary: string;
+  permissionVersion?: number | undefined;
   change: (state: DecisionState) => DecisionState;
 }) {
   const owner = requireOwner(input.ctx);
@@ -48,16 +54,23 @@ export async function mutateDecision(input: {
     if (!before) fail("That workspace was not found.", { errorCode: "not_found", statusCode: 404 });
     if (before.version !== input.expectedVersion) fail("Your workspace changed. Refresh the current values and try again.", { errorCode: "stale_version", statusCode: 409 });
     let next: DecisionState;
-    try { next = input.change(structuredClone(before.state)); }
+    try {
+      if (!isHumanCaller(input.ctx)) checkAgentMutation(before.state, input.kind, input.permissionVersion);
+      next = input.change(structuredClone(before.state));
+    }
     catch (error) { return domainFailure(error); }
     if (stateHash(next) === stateHash(before.state)) fail("These values are already saved.", { errorCode: "no_change", statusCode: 409 });
+    // Restoring content must never revive a permission version an agent saw
+    // before a revocation. A buyer can undo a permission choice at a new epoch.
+    if (input.kind === "undo") next.agentPermissions = { ...permissionsFor(next), version: permissionsFor(before.state).version + 1 };
+    if (!["plan_prepared", "plan_approved"].includes(input.kind)) next = invalidatePurchasePlan(next);
     const version = before.version + 1;
     const now = new Date().toISOString();
     const [saved] = await tx.update(decisions).set({ state: next, version, updatedAt: now }).where(and(eq(decisions.id, input.id), eq(decisions.ownerEmail, owner), eq(decisions.version, before.version))).returning();
     if (!saved) fail("Your workspace changed. Read its current version.", { errorCode: "stale_version", statusCode: 409 });
     await tx.insert(decisionEvents).values({
       id: randomUUID(), decisionId: saved.id, ownerEmail: owner, version, kind: input.kind,
-      actor: input.ctx?.caller === "tool" ? "agent" : "human", summary: input.summary,
+      actor: isHumanCaller(input.ctx) ? "human" : "agent", summary: input.summary,
       previousWinner: recommend(before.state).winner?.supplier ?? null,
       nextWinner: recommend(next).winner?.supplier ?? null, beforeState: before.state, createdAt: now,
     });

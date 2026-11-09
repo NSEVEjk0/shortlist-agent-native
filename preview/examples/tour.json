@@ -2,8 +2,8 @@
   "schema": "shortlist-tour-v1",
   "mode": "guided-fictional-domain-snapshots-no-agent",
   "engine": {
-    "domainSHA256": "ea3c73ecd6142e95eaf043f313be5e6ee3f9c96acd9d4d6894208f16192f53ed",
-    "typesSHA256": "f962f2acdb7dad54ea74b163a7eec0d94dcf0b64e3424ae985f0272ada82368f"
+    "domainSHA256": "601ed40c81f5f187513f98e641fd0ebd6d98daa1195a02a9acf976588a5fab77",
+    "typesSHA256": "4cb8ab0ea7739fb572dca5cff37c78dfbbe779edd6ceb517d93c8a092f25a8da"
   },
   "steps": [
     {

@@ -24,10 +24,54 @@ export type Requirements = {
   currency: "USD" | "EUR" | "GBP";
   deliveryBy: string;
 };
+export type BuyingBrief = {
+  transcript: string;
+  patch: Partial<Requirements>;
+  evidence: Partial<Record<keyof Requirements, string>>;
+  notes: string[];
+};
 export type DecisionState = {
   title: string;
   requirements: Requirements;
   quotes: Quote[];
+  agentPermissions?: AgentPermissions;
+  purchasePlan?: PurchasePlan;
+};
+export const AGENT_CAPABILITIES = ["extractFacts", "addQuotes", "draftPlans", "changeRequirements"] as const;
+export type AgentCapability = typeof AGENT_CAPABILITIES[number];
+export type AgentPermissions = { version: number; allowed: Record<AgentCapability, boolean> };
+export type PlanCheck = { id: string; label: string; ok: boolean };
+export type PlanVerification = { checker: string; passed: boolean; totalMinor: number | null; checks: PlanCheck[] };
+export type PurchasePlan = {
+  id: string;
+  fingerprint: string;
+  inputHash: string;
+  preparedVersion: number;
+  preparedAt: string;
+  quoteId: string;
+  supplier: string;
+  quantity: number;
+  currency: Requirements["currency"];
+  unitMinor: number;
+  shippingMinor: number;
+  taxMinor: number;
+  totalMinor: number;
+  deliveryDate: string;
+  verification: PlanVerification;
+  status: "ready" | "approved" | "outdated";
+  approval: { fingerprint: string; reviewedVersion: number; approvedAt: string } | null;
+};
+export type WorkableOption = {
+  quoteId: string;
+  supplier: string;
+  totalMinor: number | null;
+  eligible: boolean;
+  extraBudgetMinor: number | null;
+  lateDays: number | null;
+  maximumUnitMinor: number | null;
+  missing: string[];
+  changes: string[];
+  questions: string;
 };
 export type QuoteAssessment = {
   id: string;
@@ -66,4 +110,6 @@ export type DecisionEvent = {
 export type DecisionView = DecisionRecord & {
   recommendation: Recommendation;
   events: DecisionEvent[];
+  permissions: AgentPermissions;
+  options: WorkableOption[];
 };

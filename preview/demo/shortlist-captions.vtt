@@ -1,49 +1,152 @@
 WEBVTT
 
-00:00:00.000 --> 00:00:03.600
-Shortlist helps you compare supplier quotes and choose one that
+00:00:00.000 --> 00:00:04.568
+Shortlist turns a buying brief and supplier quotes into
 
-00:00:03.600 --> 00:00:07.200
-meets your budget and deadline. These three quotes are fictional.
+00:00:04.568 --> 00:00:09.137
+a checked purchase plan. This is the actual app,
 
-00:00:07.850 --> 00:00:10.534
-Click a price to see the exact words it came
+00:00:09.137 --> 00:00:13.705
+using fictional quotes, real Vultr requests, and shortened model
 
-00:00:10.534 --> 00:00:10.802
-from.
+00:00:13.705 --> 00:00:14.720
+waiting time.
 
-00:00:11.452 --> 00:00:14.981
-Cedar confirms a delay. I correct the date and lock
+00:00:15.320 --> 00:00:19.301
+A spoken brief asks for one hundred workshop kits,
 
-00:00:14.981 --> 00:00:17.452
-it, so Harbor becomes the suitable choice.
+00:00:19.301 --> 00:00:23.282
+a complete budget of five hundred ninety US dollars,
 
-00:00:18.102 --> 00:00:21.661
-Now Cedar sends a new quote. A real agent reads
+00:00:23.282 --> 00:00:27.264
+delivered by November fourteenth. Vultr transcribes it and
+proposes
 
-00:00:21.661 --> 00:00:25.220
-it and saves the new price and shipping. My locked
+00:00:27.264 --> 00:00:30.360
+requirements. The buyer reviews and saves them.
 
-00:00:25.220 --> 00:00:28.779
-date stays. The updated facts appear in the comparison, and
+00:00:35.360 --> 00:00:38.579
+Each extracted price links to the exact words in
 
-00:00:28.779 --> 00:00:30.558
-Shortlist verifies the saved change.
+00:00:38.579 --> 00:00:41.798
+the quote. Cedar confirms a delivery delay. The buyer
 
-00:00:37.395 --> 00:00:41.400
-Reloading keeps the correction. Lowering the budget to five
-hundred
+00:00:41.798 --> 00:00:45.016
+corrects the date and locks it. No current offer
 
-00:00:41.400 --> 00:00:43.803
-ninety dollars leaves no suitable offer.
+00:00:45.016 --> 00:00:47.520
+now meets both the budget and deadline.
 
-00:00:44.453 --> 00:00:48.922
-Undo restores the earlier budget. Export downloads the decision
+00:00:48.120 --> 00:00:51.597
+Cedar sends an updated price and shipping charge. The
+
+00:00:51.597 --> 00:00:55.073
+Vultr buying agent reads the original and saves supported
+
+00:00:55.073 --> 00:00:58.550
+facts through Agent Native actions. The locked November
+eighteenth
+
+00:00:58.550 --> 00:01:01.640
+delivery date stays unchanged, including after a reload.
+
+00:01:06.640 --> 00:01:10.164
+Shortlist finds a useful next move. Harbor is five
+
+00:01:10.164 --> 00:01:13.688
+dollars over budget. With shipping and tax unchanged, its
+
+00:01:13.688 --> 00:01:17.213
+unit price must be five dollars ten cents or
+
+00:01:17.213 --> 00:01:20.737
+less. The supplier question draft asks for that revised,
+
+00:01:20.737 --> 00:01:21.520
+complete quote.
+
+00:01:22.120 --> 00:01:26.156
+The buyer reviews a budget of five hundred ninety
+
+00:01:26.156 --> 00:01:30.192
+five dollars. Harbor now fits. A separate checker recalculates
+
+00:01:30.192 --> 00:01:34.227
+the complete cost and checks quantity, currency, delivery,
+evidence
+
+00:01:34.227 --> 00:01:38.263
+and supplier exclusions. The exact plan is ready for
+
+00:01:38.263 --> 00:01:39.160
+human review.
+
+00:01:39.760 --> 00:01:43.926
+The buyer reviews the supplier, complete price, delivery and
+
+00:01:43.926 --> 00:01:48.091
+exclusions, then approves this exact plan. The agent cannot
+
+00:01:48.091 --> 00:01:52.257
+give that approval. Shortlist can now speak the saved
+
+00:01:52.257 --> 00:01:52.720
+decision.
+
+00:01:53.320 --> 00:01:58.461
+Your buying brief is 100 units, a complete budget
+
+00:01:58.461 --> 00:02:03.602
+of $595.00, and delivery by 2026-11-14. Harbor Studio is
+
+00:02:03.602 --> 00:02:08.742
+the current recommendation at $595.00 in total, arriving
+2026-11-12.
+
+00:02:08.742 --> 00:02:13.883
+Review these supplier exclusions: Design services are not
+included.
+
+00:02:13.883 --> 00:02:19.024
+Your reviewed plan for Harbor Studio is approved. You
+
+00:02:19.024 --> 00:02:21.880
+can download its purchase packet.
+
+00:02:22.480 --> 00:02:26.775
+The approved purchase packet downloads with the original quotes,
+
+00:02:26.775 --> 00:02:31.070
+source evidence, corrections and independent checks. It carries
+the
+
+00:02:31.070 --> 00:02:35.366
+exact plan fingerprint, so the reviewed decision can be
+
+00:02:35.366 --> 00:02:36.320
+inspected later.
+
+00:02:36.920 --> 00:02:40.766
+Now the supplier increases shipping. The old approval is
+
+00:02:40.766 --> 00:02:44.613
+cleared and a fresh review is required. Undo restores
+
+00:02:44.613 --> 00:02:48.459
+the quote but cannot restore that approval. The buyer
+
+00:02:48.459 --> 00:02:52.305
+can also revoke agent writes while reading and comparisons
+
+00:02:52.305 --> 00:02:53.160
+remain available.
+
+00:02:53.760 --> 00:02:57.554
+Shortlist brings the buying brief, evidence, workable options
 and
 
-00:00:48.922 --> 00:00:53.390
-its original quote evidence. This recording shows the actual
-working
+00:02:57.554 --> 00:03:01.348
+reviewed purchase plan together. The agent helps with the
 
-00:00:53.390 --> 00:00:53.837
-application.
+00:03:01.348 --> 00:03:04.720
+work, and the buyer controls the saved decision.
