@@ -14,7 +14,7 @@ The added workable-option flow supports those criteria: the agent and buyer turn
 
 The rules require a **public Builder.io Clips recording showing the actual app**, viewable without login. A live deployment and public repository are encouraged. Recording alone does not submit the entry; use the [submission form](https://www.builder.io/hackathon/submit) and confirm receipt.
 
-The [complete upgrade demonstration](https://shortlist-buying.vercel.app/demo/) and [downloadable narrated MP4](https://shortlist-buying.vercel.app/demo/shortlist-demo.mp4) show the workflow below with Vultr narration. Publish the upgraded recording through Clips and verify its public link before entering the submission form. The existing [public Clips recording](https://clips.agent-native.com/share/Vh5lcfDQTQX1) documents the earlier comparison and protected-correction workflow; it predates this upgrade.
+The [public Clips recording](https://clips.agent-native.com/share/3pTj7nJHMTOV) and [downloadable narrated MP4](https://shortlist-buying.vercel.app/demo/shortlist-demo.mp4) show the complete workflow below with Vultr narration. The public Clips video matches the verified final MP4, lasts 3 minutes 5 seconds, and includes the application's spoken decision and captions. Use this public Clips link in the submission form and confirm receipt.
 
 1. Speak the disclosed fictional buying brief; review and save the proposed requirements.
 2. Inspect an original quote and exact price excerpt.

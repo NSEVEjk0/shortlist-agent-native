@@ -4,9 +4,9 @@
 
 Shortlist helps small operations teams decide which supplier to use. Speak or type what you need, add the original quotes, and compare complete costs and delivery. The buying agent extracts facts with exact source excerpts while keeping the corrections you lock. If an offer falls short, Shortlist works out the price, delivery or missing details that would make it fit. You review an independently checked plan, approve its exact version, and download the purchase packet.
 
-[Open Shortlist](https://shortlist-buying.vercel.app/home) · [Watch the workflow](https://shortlist-buying.vercel.app/demo/) · [Source](https://github.com/NSEVEjk0/shortlist-agent-native) · [Guided tour](https://shortlist-buying.vercel.app/tour/)
+[Open Shortlist](https://shortlist-buying.vercel.app/home) · [Watch the workflow](https://clips.agent-native.com/share/3pTj7nJHMTOV) · [Source](https://github.com/NSEVEjk0/shortlist-agent-native) · [Guided tour](https://shortlist-buying.vercel.app/tour/)
 
-The [narrated demonstration](https://shortlist-buying.vercel.app/demo/) follows the actual app from the voice brief to the approved purchase packet. It also shows changed shipping clearing approval, undo keeping that approval cleared, and revocation leaving comparisons available. The brief and quotes are fictional; transcription, agent actions, speech and saved changes are actual Vultr and application calls. Vultr supplies the narration. Model waiting time is shortened and disclosed in the film.
+The [public Clips demonstration](https://clips.agent-native.com/share/3pTj7nJHMTOV) follows the actual app from the voice brief to the approved purchase packet. It also shows changed shipping clearing approval, undo keeping that approval cleared, and revocation leaving comparisons available. The brief and quotes are fictional; transcription, agent actions, speech and saved changes are actual Vultr and application calls. Vultr supplies the narration. Model waiting time is shortened and disclosed in the film. The same final video is available on the [demo page](https://shortlist-buying.vercel.app/demo/) and as a [downloadable MP4](https://shortlist-buying.vercel.app/demo/shortlist-demo.mp4).
 
 ## From the brief to the purchase packet
 
